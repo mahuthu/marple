@@ -7,16 +7,114 @@ import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router";
 import { useState } from "react";
+// import Subscription from "../components/Subscription";
+import { categories } from "../data";
+import CallToAction from "../components/CallToAction";
 
 const Container = styled.div``;
 
+const HeroSection = styled.div`
+  height: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  margin-bottom: 40px;
+  background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+  ${mobile({ padding: "0 20px", height: "200px" })}
+`;
+
+const BackgroundImage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url(${props => props.image});
+  background-size: cover;
+  background-position: center;
+`;
+
 const Title = styled.h1`
+  color: white;
+  font-size: 3rem;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 20px;
+  max-width: 600px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    background-color: #8e262f;
+  }
+
+  ${mobile({ fontSize: "2rem" })}
+`;
+
+const CategoryInfo = styled.div`
+  padding: 40px;
+  background-color: #f9f9f9;
   margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+`;
+
+const Description = styled.p`
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: justify;
+`;
+
+const Subcategories = styled.div`
+  margin-top: 30px;
+`;
+
+const SubcategoryTitle = styled.h3`
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+`;
+
+const SubcategoryList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+`;
+
+const SubcategoryItem = styled.li`
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &::before {
+    content: '✓';
+    color: #8e262f;
+    margin-right: 10px;
+  }
 `;
 
 const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 20px;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Filter = styled.div`
@@ -36,14 +134,16 @@ const Select = styled.select`
   margin-right: 20px;
   ${mobile({ margin: "10px 0px" })}
 `;
+
 const Option = styled.option``;
 
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
-  console.log(cat);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
+
+  const currentCategory = categories.find(category => category.cat.toLowerCase() === cat.toLowerCase());
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -53,13 +153,29 @@ const ProductList = () => {
     });
   };
 
-  console.log(filters)
-
   return (
     <Container>
       <Navbar />
       <Announcement />
-      <Title>{cat}</Title>
+      <HeroSection>
+        <BackgroundImage image={currentCategory?.img} />
+        <Title>{currentCategory?.title || cat}</Title>
+      </HeroSection>
+      
+      {currentCategory && (
+        <CategoryInfo>
+          <Description>{currentCategory.detailedDesc}</Description>
+          <Subcategories>
+            <SubcategoryTitle>Our {currentCategory.title} Range Includes:</SubcategoryTitle>
+            <SubcategoryList>
+              {currentCategory.subcategories.map((subcategory, index) => (
+                <SubcategoryItem key={index}>{subcategory}</SubcategoryItem>
+              ))}
+            </SubcategoryList>
+          </Subcategories>
+        </CategoryInfo>
+      )}
+
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
@@ -73,7 +189,6 @@ const ProductList = () => {
             <Option>Green</Option>
             <Option>Brown</Option>
             <Option>Maroon</Option>
-
           </Select>
           <Select name="size" onChange={handleFilters}>
             <Option disabled>Size</Option>
@@ -94,7 +209,8 @@ const ProductList = () => {
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
-      <Newsletter />
+      <CallToAction />
+      {/* <Subscription /> */}
       <Footer />
     </Container>
   );

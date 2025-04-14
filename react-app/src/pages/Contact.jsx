@@ -234,6 +234,9 @@ const MapSection = styled.div`
   margin-top: 80px;
   height: 400px;
   width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 `;
 
 const Contact = () => {
@@ -280,7 +283,7 @@ const Contact = () => {
               </IconWrapper>
               <InfoContent>
                 <InfoTitle>Address</InfoTitle>
-                <InfoText>69 Enterprise Road, Industrial Area Nairobi</InfoText>
+                <InfoText>Eastern Bypass Oppsite Shell Petrol Station</InfoText>
               </InfoContent>
             </InfoItem>
             
@@ -290,8 +293,8 @@ const Contact = () => {
               </IconWrapper>
               <InfoContent>
                 <InfoTitle>Phone</InfoTitle>
-                <InfoText>+254 721 917 816</InfoText>
-                <InfoText>+254 728976780</InfoText>
+                <InfoText>+254 795683399</InfoText>
+                {/* <InfoText>+254 728976780</InfoText> */}
               </InfoContent>
             </InfoItem>
             
@@ -301,8 +304,8 @@ const Contact = () => {
               </IconWrapper>
               <InfoContent>
                 <InfoTitle>Email</InfoTitle>
-                <InfoText>info@woodproductskenya.co.ke</InfoText>
-                <InfoText>customercare@woodproductskenya.co.ke</InfoText>
+                <InfoText>info@marplewoodproducts.co.ke</InfoText>
+                {/* <InfoText>customercare@woodproductskenya.co.ke</InfoText> */}
               </InfoContent>
             </InfoItem>
             
@@ -377,7 +380,7 @@ const Contact = () => {
                   <option value="floors">Floors</option>
                   <option value="kitchens">Kitchens</option>
                   <option value="wardrobes">Wardrobes</option>
-                  <option value="service">Service</option>
+                  <option value="accesories">Service</option>
                   <option value="other">Other</option>
                 </Select>
               </InputGroup>
@@ -399,7 +402,7 @@ const Contact = () => {
         
         <MapSection>
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7799999999997!2d36.8584!3d-1.3089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11b9d5555555%3A0x9999999999999999!2sEnterprise%20Road%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7799999999997!2d36.92448194739931!3d-1.1545981005660528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11b9d5555555%3A0x9999999999999999!2sMarple%20Wood%20Products!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 

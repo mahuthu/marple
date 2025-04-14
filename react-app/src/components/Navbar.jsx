@@ -6,6 +6,7 @@ import { mobile } from '../responsive';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutUser } from '../redux/authActions';
 import { Link, useNavigate } from 'react-router-dom';
+import { categories } from '../data';
 
 const Container = styled.div`
   height: 100px;
@@ -148,6 +149,61 @@ const MenuItemLink = styled.div`
   }
 `;
 
+const ProductsDropdown = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const DropdownContent = styled.div`
+  display: ${props => props.isOpen ? 'block' : 'none'};
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+`;
+
+const DropdownItem = styled(Link)`
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #f5f5f5;
+    color: #8e262f;
+  }
+`;
+
+const ContactButton = styled(Link)`
+  text-decoration: none;
+  color: white;
+  background-color: #8e262f;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 25px;
+  
+  &:hover {
+    background-color: #6d1d24;
+    transform: translateY(-2px);
+  }
+
+  ${mobile({ 
+    fontSize: '12px',
+    padding: '6px 12px',
+    marginLeft: '10px'
+  })}
+`;
+
 const Navbar = () => {
   const quantity = useSelector(state => state.cart.quantity);
   const currentUser = useSelector(state => state.user.currentUser);
@@ -158,11 +214,16 @@ const Navbar = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const desktopMenuRef = useRef(null);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (desktopMenuRef.current && !desktopMenuRef.current.contains(event.target)) {
         setDesktopMenuOpen(false);
+      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProductsOpen(false);
       }
     };
 
@@ -192,6 +253,10 @@ const Navbar = () => {
     if (searchTerm.trim()) {
       navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
     }
+  };
+
+  const toggleProductsDropdown = () => {
+    setIsProductsOpen(!isProductsOpen);
   };
 
   return (
@@ -227,18 +292,29 @@ const Navbar = () => {
           </SearchContainer>
         </Center>
         <Right>
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <DesktopMenuItem>HOME</DesktopMenuItem>
           </Link>
           <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }}>
             <DesktopMenuItem>ABOUT</DesktopMenuItem>
           </Link>
-          <Link to="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <DesktopMenuItem>PRODUCTS</DesktopMenuItem>
-          </Link>
-          <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <DesktopMenuItem>CONTACTS</DesktopMenuItem>
-          </Link>
+          <ProductsDropdown ref={dropdownRef}>
+            <DesktopMenuItem onClick={toggleProductsDropdown}>
+              PRODUCTS
+            </DesktopMenuItem>
+            <DropdownContent isOpen={isProductsOpen}>
+              {categories.map((category) => (
+                <DropdownItem 
+                  key={category.id} 
+                  to={`/products/${category.cat}`}
+                  onClick={() => setIsProductsOpen(false)}
+                >
+                  {category.title}
+                </DropdownItem>
+              ))}
+            </DropdownContent>
+          </ProductsDropdown>
+          <ContactButton to="/contact">CONTACT</ContactButton>
           <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">
@@ -280,9 +356,18 @@ const Navbar = () => {
           <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }}>
             <MobileMenuItem>About Us</MobileMenuItem>
           </Link>
-          <Link to="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MobileMenuItem>Products</MobileMenuItem>
-          </Link>
+          <MobileMenuItem onClick={() => setMobileMenuOpen(false)}>
+            Products
+            {categories.map((category) => (
+              <DropdownItem 
+                key={category.id} 
+                to={`/products/${category.cat}`}
+                style={{ paddingLeft: '20px' }}
+              >
+                {category.title}
+              </DropdownItem>
+            ))}
+          </MobileMenuItem>
           <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
             <MobileMenuItem>Contacts</MobileMenuItem>
           </Link>

@@ -122,7 +122,7 @@ export default function NewProduct() {
           <label>Categories</label>
           <input 
             type="text" 
-            placeholder="fitted, adjustable, bucket" 
+            placeholder="doors, floors, cabinets, wardrobes, accessories, others" 
             onChange={handleCat} 
           />
         </div>

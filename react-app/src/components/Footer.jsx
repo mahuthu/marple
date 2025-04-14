@@ -117,7 +117,7 @@ const Footer = () => {
           <Title>About Us</Title>
           <ContactText>
             We are defined by standardized quality and perfection to our craft. 
-            We have been making timber products since 1935. For generations we have 
+            We have been making timber products since 2018. For years we have 
             dedicated ourselves creating products that cater for various developments.
           </ContactText>
           <SocialIcons>
@@ -179,10 +179,10 @@ const Footer = () => {
               <Link href="/products/wardrobes">Wardrobes</Link>
             </ListItem>
             <ListItem>
-              <Link href="/products/joinery">Joinery</Link>
+              <Link href="/products/Accessories">Accessories</Link>
             </ListItem>
             <ListItem>
-              <Link href="/products/processed-timber">Processed Timber</Link>
+              <Link href="/products/Others">Others</Link>
             </ListItem>
           </List>
         </Column>
@@ -196,7 +196,7 @@ const Footer = () => {
               </svg>
             </ContactIcon>
             <ContactText>
-              69, Enterprise Road, Industrial Area Nairobi
+              Eastern Bypass Opposite Shell Petrol Station
             </ContactText>
           </ContactItem>
           <ContactItem>
@@ -206,7 +206,7 @@ const Footer = () => {
               </svg>
             </ContactIcon>
             <ContactText>
-              +254 721 917 816 / +254 728976780
+              +254 795683399 
             </ContactText>
           </ContactItem>
           <ContactItem>
@@ -216,15 +216,14 @@ const Footer = () => {
               </svg>
             </ContactIcon>
             <ContactText>
-              info@woodproductskenya.co.ke<br />
-              customercare@woodproductskenya.co.ke
+              info@marplewoodproducts.co.ke<br />
             </ContactText>
           </ContactItem>
         </Column>
       </Wrapper>
       
       <Copyright>
-        © {new Date().getFullYear()} Wood Products Kenya. All rights reserved.
+        © {new Date().getFullYear()} Marple Wood Products. All rights reserved.
       </Copyright>
     </Container>
   );

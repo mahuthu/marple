@@ -4,6 +4,7 @@ import Announcement from '../components/Announcement'
 import UserProfile from '../components/UserProfile'
 import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
+import Subscription from '../components/Subscription'
 
 const Profile = () => {
   return (
@@ -11,7 +12,7 @@ const Profile = () => {
       <Announcement/>
       <Navbar/>
       <UserProfile/>
-      <Newsletter/>
+      <Subscription/>
       <Footer/>
     </div>
   )

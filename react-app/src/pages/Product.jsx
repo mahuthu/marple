@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { publicRequest } from "../requestmethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
+import Subscription from '../components/Subscription';
 
 const Container = styled.div`
   background-color: #f5fbfd;
@@ -227,7 +228,7 @@ const Product = () => {
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
-            <Newsletter />
+            <Subscription />
             <Footer />
         </Container>
     );

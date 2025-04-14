@@ -60,7 +60,7 @@ const Button = styled.button`
   transition: background-color 0.3s ease;
   
   &:hover {
-    background-color: #d13a54;
+    background-color: #6d1d24;
   }
   
   ${mobile({ borderRadius: "4px", width: "100%" })}
