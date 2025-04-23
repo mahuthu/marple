@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const HeroSection = styled.div`
   height: 60vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/about-hero.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/interior1.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -216,7 +216,7 @@ const About = () => {
       <HeroSection>
         <div>
           <HeroTitle>About Us</HeroTitle>
-          <HeroSubtitle>Your trusted partner in quality wood products since 1935</HeroSubtitle>
+          <HeroSubtitle>Your trusted partner in quality wood products since 2018</HeroSubtitle>
         </div>
       </HeroSection>
       
@@ -237,7 +237,7 @@ const About = () => {
                 </Paragraph>
               </TextContent>
               <ImageContent>
-                <Image src="/images/about-company.jpg" alt="Wood Products Workshop" />
+                <Image src="/images/interior2.avif" alt="Wood Products Workshop" />
               </ImageContent>
             </SectionContent>
           </Section>
