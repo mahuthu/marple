@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 
@@ -12,6 +12,9 @@ const Title = styled.h2`
   margin-bottom: 50px;
   font-size: 36px;
   color: #333;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 `;
 
 const GalleryWrapper = styled.div`
@@ -34,6 +37,15 @@ const ProjectCard = styled.div`
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => {
+    if (!props.isVisible) {
+      return props.index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
+    }
+    return 'translateX(0)';
+  }};
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: ${props => `${props.index * 0.1}s`};
   
   &:hover {
     transform: translateY(-10px);
@@ -72,6 +84,10 @@ const ProjectLocation = styled.p`
 `;
 
 const ProjectsGallery = () => {
+  const [visibleItems, setVisibleItems] = useState({});
+  const titleRef = useRef(null);
+  const projectRefs = useRef([]);
+
   const projects = [
     {
       id: 1,
@@ -95,14 +111,68 @@ const ProjectsGallery = () => {
       image: "/images/floors5.avif"
     }
   ];
-  
+
+  useEffect(() => {
+    const titleObserver = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        setVisibleItems(prev => ({ ...prev, title: true }));
+        titleObserver.unobserve(entry.target);
+      }
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    if (titleRef.current) {
+      titleObserver.observe(titleRef.current);
+    }
+
+    // Create observers for each project card
+    const projectObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.dataset.id;
+          setVisibleItems(prev => ({ ...prev, [id]: true }));
+          projectObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    projectRefs.current.forEach(ref => {
+      if (ref) {
+        projectObserver.observe(ref);
+      }
+    });
+
+    return () => {
+      if (titleRef.current) {
+        titleObserver.unobserve(titleRef.current);
+      }
+      projectRefs.current.forEach(ref => {
+        if (ref) {
+          projectObserver.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
   return (
     <Container>
-      <Title>Our Completed Projects</Title>
+      <Title ref={titleRef} isVisible={visibleItems.title}>Our Completed Projects</Title>
       <GalleryWrapper>
         <ProjectGrid>
-          {projects.map(project => (
-            <ProjectCard key={project.id}>
+          {projects.map((project, index) => (
+            <ProjectCard 
+              key={project.id} 
+              ref={el => projectRefs.current[index] = el}
+              data-id={`project-${project.id}`}
+              isVisible={visibleItems[`project-${project.id}`]}
+              index={index}
+            >
               <ProjectImage src={project.image} alt={project.title} />
               <ProjectInfo>
                 <ProjectTitle>{project.title}</ProjectTitle>

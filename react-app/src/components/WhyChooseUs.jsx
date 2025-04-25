@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 
@@ -19,6 +19,9 @@ const Title = styled.h2`
   margin-bottom: 50px;
   color: #333;
   position: relative;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   
   &:after {
     content: '';
@@ -37,6 +40,14 @@ const FeatureSection = styled.div`
   align-items: center;
   margin-bottom: 60px;
   flex-direction: ${props => props.reverse ? 'row-reverse' : 'row'};
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => {
+    if (!props.isVisible) {
+      return props.reverse ? 'translateX(50px)' : 'translateX(-50px)';
+    }
+    return 'translateX(0)';
+  }};
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   
   ${mobile({ flexDirection: 'column' })}
 `;
@@ -94,12 +105,68 @@ const FeatureItem = styled.li`
 `;
 
 const WhyChooseUs = () => {
+  const [visibleItems, setVisibleItems] = useState({});
+  const titleRef = useRef(null);
+  const featureRefs = useRef([]);
+
+  useEffect(() => {
+    const titleObserver = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        setVisibleItems(prev => ({ ...prev, title: true }));
+        titleObserver.unobserve(entry.target);
+      }
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    if (titleRef.current) {
+      titleObserver.observe(titleRef.current);
+    }
+
+    // Create observers for each feature section
+    const featureObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.dataset.id;
+          setVisibleItems(prev => ({ ...prev, [id]: true }));
+          featureObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    featureRefs.current.forEach(ref => {
+      if (ref) {
+        featureObserver.observe(ref);
+      }
+    });
+
+    return () => {
+      if (titleRef.current) {
+        titleObserver.unobserve(titleRef.current);
+      }
+      featureRefs.current.forEach(ref => {
+        if (ref) {
+          featureObserver.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
   return (
     <Container>
       <Wrapper>
-        <Title>Why Choose Us?</Title>
+        <Title ref={titleRef} isVisible={visibleItems.title}>Why Choose Us?</Title>
         
-        <FeatureSection>
+        <FeatureSection 
+          ref={el => featureRefs.current[0] = el} 
+          data-id="feature-1"
+          isVisible={visibleItems["feature-1"]}
+        >
           <ImageContainer>
             <Image src="/images/interior1.webp" alt="Quality Interior Design" />
           </ImageContainer>
@@ -119,7 +186,12 @@ const WhyChooseUs = () => {
           </TextContainer>
         </FeatureSection>
         
-        <FeatureSection reverse>
+        <FeatureSection 
+          reverse
+          ref={el => featureRefs.current[1] = el} 
+          data-id="feature-2"
+          isVisible={visibleItems["feature-2"]}
+        >
           <ImageContainer>
             <Image src="/images/cabinets2.jpg" alt="Innovative Solutions" />
           </ImageContainer>

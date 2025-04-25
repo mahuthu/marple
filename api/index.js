@@ -24,12 +24,14 @@ const allowedOrigins = [
   // 'https://34.111.185.192',   // Ingress IP
   'http://localhost:3000',   // Local frontend (React)
   'http://localhost:5160',
-  'http://kofia.co.ke',      // Add your production frontend domain
-  'https://kofia.co.ke' ,   // Local dashboard
+  'http://marplewoodproducts.co.ke',      // Add your production frontend domain
+  'https://marplewoodproducts.co.ke' ,   // Local dashboard
   // 'http://34.111.185.192.nip.io',
   // 'https://34.111.185.192.nip.io'
-  'http://admin.kofia.co.ke',
-  'https://admin.kofia.co.ke'
+  'http://admin.marplewoodproducts.co.ke',
+  'https://admin.marplewoodproducts.co.ke',
+  'http://20.121.40.132',
+  'https://20.121.40.132'
   ];
 
 // CORS configuration with dynamic origin handling

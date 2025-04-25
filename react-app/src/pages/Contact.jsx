@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
@@ -33,6 +33,9 @@ const HeroSection = styled.div`
 const HeroTitle = styled.h1`
   font-size: 48px;
   margin-bottom: 20px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
+  transition: opacity 0.8s ease, transform 0.8s ease;
   ${mobile({ fontSize: "36px" })}
 `;
 
@@ -55,7 +58,11 @@ const Wrapper = styled.div`
   })}
 `;
 
-const ContactInfo = styled.div``;
+const ContactInfo = styled.div`
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateX(0)' : 'translateX(-30px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
+`;
 
 const Title = styled.h2`
   font-size: 36px;
@@ -85,6 +92,10 @@ const InfoItem = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 30px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateX(0)' : 'translateX(-20px)'};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: ${props => `${0.2 + props.index * 0.1}s`};
 `;
 
 const IconWrapper = styled.div`
@@ -115,6 +126,10 @@ const InfoText = styled.p`
 
 const SocialLinks = styled.div`
   margin-top: 40px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: 0.5s;
 `;
 
 const SocialTitle = styled.h3`
@@ -138,6 +153,10 @@ const SocialIcon = styled.a`
   justify-content: center;
   color: white;
   transition: all 0.3s ease;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(15px)'};
+  transition: transform 0.5s ease, background-color 0.3s ease, opacity 0.5s ease;
+  transition-delay: ${props => `${0.5 + props.index * 0.1}s`};
   
   &:hover {
     transform: translateY(-3px);
@@ -150,6 +169,9 @@ const FormContainer = styled.div`
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateX(0)' : 'translateX(30px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
 `;
 
 const Form = styled.form`
@@ -168,6 +190,10 @@ const FormTitle = styled.h2`
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(15px)'};
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: ${props => `${0.1 + props.index * 0.07}s`};
 `;
 
 const Label = styled.label`
@@ -224,6 +250,10 @@ const SubmitButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(15px)'};
+  transition: opacity 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+  transition-delay: 0.5s;
   
   &:hover {
     background-color: #333;
@@ -237,6 +267,9 @@ const MapSection = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
 `;
 
 const Contact = () => {
@@ -247,6 +280,98 @@ const Contact = () => {
     product: '',
     message: ''
   });
+  const [visibleElements, setVisibleElements] = useState({});
+  
+  const heroTitleRef = useRef(null);
+  const contactInfoRef = useRef(null);
+  const infoItemRefs = useRef([]);
+  const socialLinksRef = useRef(null);
+  const socialIconRefs = useRef([]);
+  const formContainerRef = useRef(null);
+  const inputGroupRefs = useRef([]);
+  const submitButtonRef = useRef(null);
+  const mapSectionRef = useRef(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.dataset.id;
+          setVisibleElements(prev => ({ ...prev, [id]: true }));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe hero title
+    if (heroTitleRef.current) {
+      heroTitleRef.current.dataset.id = 'heroTitle';
+      observer.observe(heroTitleRef.current);
+    }
+
+    // Observe contact info section
+    if (contactInfoRef.current) {
+      contactInfoRef.current.dataset.id = 'contactInfo';
+      observer.observe(contactInfoRef.current);
+    }
+
+    // Observe info items
+    infoItemRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.id = `infoItem-${index}`;
+        observer.observe(ref);
+      }
+    });
+
+    // Observe social links
+    if (socialLinksRef.current) {
+      socialLinksRef.current.dataset.id = 'socialLinks';
+      observer.observe(socialLinksRef.current);
+    }
+
+    // Observe social icons
+    socialIconRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.id = `socialIcon-${index}`;
+        observer.observe(ref);
+      }
+    });
+
+    // Observe form container
+    if (formContainerRef.current) {
+      formContainerRef.current.dataset.id = 'formContainer';
+      observer.observe(formContainerRef.current);
+    }
+
+    // Observe input groups
+    inputGroupRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.id = `inputGroup-${index}`;
+        observer.observe(ref);
+      }
+    });
+
+    // Observe submit button
+    if (submitButtonRef.current) {
+      submitButtonRef.current.dataset.id = 'submitButton';
+      observer.observe(submitButtonRef.current);
+    }
+
+    // Observe map section
+    if (mapSectionRef.current) {
+      mapSectionRef.current.dataset.id = 'mapSection';
+      observer.observe(mapSectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -266,18 +391,22 @@ const Contact = () => {
       <Navbar />
       
       <HeroSection>
-        <HeroTitle>Contact Us</HeroTitle>
+        <HeroTitle ref={heroTitleRef} isVisible={visibleElements.heroTitle}>Contact Us</HeroTitle>
       </HeroSection>
       
       <ContentSection>
         <Wrapper>
-          <ContactInfo>
+          <ContactInfo ref={contactInfoRef} isVisible={visibleElements.contactInfo}>
             <Title>Get in touch</Title>
             <Subtitle>
               Have questions about our products? Fill out the contact form or email us and we will get back to you as soon as possible!
             </Subtitle>
             
-            <InfoItem>
+            <InfoItem 
+              ref={el => infoItemRefs.current[0] = el} 
+              isVisible={visibleElements['infoItem-0']} 
+              index={0}
+            >
               <IconWrapper>
                 <LocationOn />
               </IconWrapper>
@@ -287,7 +416,11 @@ const Contact = () => {
               </InfoContent>
             </InfoItem>
             
-            <InfoItem>
+            <InfoItem 
+              ref={el => infoItemRefs.current[1] = el} 
+              isVisible={visibleElements['infoItem-1']} 
+              index={1}
+            >
               <IconWrapper>
                 <Phone />
               </IconWrapper>
@@ -298,7 +431,11 @@ const Contact = () => {
               </InfoContent>
             </InfoItem>
             
-            <InfoItem>
+            <InfoItem 
+              ref={el => infoItemRefs.current[2] = el} 
+              isVisible={visibleElements['infoItem-2']} 
+              index={2}
+            >
               <IconWrapper>
                 <Email />
               </IconWrapper>
@@ -309,32 +446,66 @@ const Contact = () => {
               </InfoContent>
             </InfoItem>
             
-            <SocialLinks>
+            <SocialLinks ref={socialLinksRef} isVisible={visibleElements.socialLinks}>
               <SocialTitle>Follow us to stay updated</SocialTitle>
               <SocialIcons>
-                <SocialIcon href="#" target="_blank">
+                <SocialIcon 
+                  ref={el => socialIconRefs.current[0] = el} 
+                  isVisible={visibleElements['socialIcon-0']} 
+                  index={0}
+                  href="#" 
+                  target="_blank"
+                >
                   <WhatsApp />
                 </SocialIcon>
-                <SocialIcon href="#" target="_blank">
+                <SocialIcon 
+                  ref={el => socialIconRefs.current[1] = el} 
+                  isVisible={visibleElements['socialIcon-1']} 
+                  index={1}
+                  href="#" 
+                  target="_blank"
+                >
                   <Facebook />
                 </SocialIcon>
-                <SocialIcon href="#" target="_blank">
+                <SocialIcon 
+                  ref={el => socialIconRefs.current[2] = el} 
+                  isVisible={visibleElements['socialIcon-2']} 
+                  index={2}
+                  href="#" 
+                  target="_blank"
+                >
                   <Instagram />
                 </SocialIcon>
-                <SocialIcon href="#" target="_blank">
+                <SocialIcon 
+                  ref={el => socialIconRefs.current[3] = el} 
+                  isVisible={visibleElements['socialIcon-3']} 
+                  index={3}
+                  href="#" 
+                  target="_blank"
+                >
                   <YouTube />
                 </SocialIcon>
-                <SocialIcon href="#" target="_blank">
+                <SocialIcon 
+                  ref={el => socialIconRefs.current[4] = el} 
+                  isVisible={visibleElements['socialIcon-4']} 
+                  index={4}
+                  href="#" 
+                  target="_blank"
+                >
                   <LinkedIn />
                 </SocialIcon>
               </SocialIcons>
             </SocialLinks>
           </ContactInfo>
           
-          <FormContainer>
+          <FormContainer ref={formContainerRef} isVisible={visibleElements.formContainer}>
             <FormTitle>Request for a quote</FormTitle>
             <Form onSubmit={handleSubmit}>
-              <InputGroup>
+              <InputGroup 
+                ref={el => inputGroupRefs.current[0] = el} 
+                isVisible={visibleElements['inputGroup-0']} 
+                index={0}
+              >
                 <Label>Name</Label>
                 <Input 
                   type="text" 
@@ -345,7 +516,11 @@ const Contact = () => {
                 />
               </InputGroup>
               
-              <InputGroup>
+              <InputGroup 
+                ref={el => inputGroupRefs.current[1] = el} 
+                isVisible={visibleElements['inputGroup-1']} 
+                index={1}
+              >
                 <Label>Mobile Number</Label>
                 <Input 
                   type="tel" 
@@ -356,7 +531,11 @@ const Contact = () => {
                 />
               </InputGroup>
               
-              <InputGroup>
+              <InputGroup 
+                ref={el => inputGroupRefs.current[2] = el} 
+                isVisible={visibleElements['inputGroup-2']} 
+                index={2}
+              >
                 <Label>Email</Label>
                 <Input 
                   type="email" 
@@ -367,7 +546,11 @@ const Contact = () => {
                 />
               </InputGroup>
               
-              <InputGroup>
+              <InputGroup 
+                ref={el => inputGroupRefs.current[3] = el} 
+                isVisible={visibleElements['inputGroup-3']} 
+                index={3}
+              >
                 <Label>Product Interested In</Label>
                 <Select 
                   name="product"
@@ -385,7 +568,11 @@ const Contact = () => {
                 </Select>
               </InputGroup>
               
-              <InputGroup>
+              <InputGroup 
+                ref={el => inputGroupRefs.current[4] = el} 
+                isVisible={visibleElements['inputGroup-4']} 
+                index={4}
+              >
                 <Label>Please send us your drawings/measurements/details below:</Label>
                 <TextArea 
                   name="message"
@@ -395,12 +582,18 @@ const Contact = () => {
                 />
               </InputGroup>
               
-              <SubmitButton type="submit">Submit</SubmitButton>
+              <SubmitButton 
+                type="submit"
+                ref={submitButtonRef}
+                isVisible={visibleElements.submitButton}
+              >
+                Submit
+              </SubmitButton>
             </Form>
           </FormContainer>
         </Wrapper>
         
-        <MapSection>
+        <MapSection ref={mapSectionRef} isVisible={visibleElements.mapSection}>
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7799999999997!2d36.92448194739931!3d-1.1545981005660528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11b9d5555555%3A0x9999999999999999!2sMarple%20Wood%20Products!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
             width="100%" 

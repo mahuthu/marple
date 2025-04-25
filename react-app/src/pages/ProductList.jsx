@@ -6,7 +6,7 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 // import Subscription from "../components/Subscription";
 import { categories } from "../data";
 import CallToAction from "../components/CallToAction";
@@ -43,6 +43,9 @@ const Title = styled.h1`
   position: relative;
   padding-bottom: 20px;
   max-width: 600px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateX(0)' : 'translateX(-50px)'};
+  transition: opacity 0.8s ease, transform 0.8s ease;
 
   &::after {
     content: '';
@@ -63,6 +66,9 @@ const CategoryInfo = styled.div`
   margin: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 `;
 
 const Description = styled.p`
@@ -97,7 +103,10 @@ const SubcategoryItem = styled.li`
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition-delay: ${props => `${0.1 + props.index * 0.05}s`};
 
   &:hover {
     transform: translateY(-5px);
@@ -114,6 +123,10 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  
   ${mobile({ flexDirection: "column" })}
 `;
 
@@ -140,11 +153,63 @@ const Option = styled.option``;
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
-  console.log(cat);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
+  const [visibleElements, setVisibleElements] = useState({});
+  
+  const titleRef = useRef(null);
+  const categoryInfoRef = useRef(null);
+  const filterContainerRef = useRef(null);
+  const subcategoryItemRefs = useRef([]);
 
   const currentCategory = categories.find(category => category.cat.toLowerCase() === cat.toLowerCase());
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.dataset.id;
+          setVisibleElements(prev => ({ ...prev, [id]: true }));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe title
+    if (titleRef.current) {
+      titleRef.current.dataset.id = 'title';
+      observer.observe(titleRef.current);
+    }
+
+    // Observe category info
+    if (categoryInfoRef.current) {
+      categoryInfoRef.current.dataset.id = 'categoryInfo';
+      observer.observe(categoryInfoRef.current);
+    }
+
+    // Observe filter container
+    if (filterContainerRef.current) {
+      filterContainerRef.current.dataset.id = 'filterContainer';
+      observer.observe(filterContainerRef.current);
+    }
+
+    // Observe subcategory items
+    subcategoryItemRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.id = `subcategoryItem-${index}`;
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [currentCategory]); // Re-run when category changes
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -160,24 +225,33 @@ const ProductList = () => {
       <Announcement />
       <HeroSection>
         <BackgroundImage image={currentCategory?.img} />
-        <Title>{currentCategory?.title || cat}</Title>
+        <Title ref={titleRef} isVisible={visibleElements.title}>
+          {currentCategory?.title || cat}
+        </Title>
       </HeroSection>
       
       {currentCategory && (
-        <CategoryInfo>
+        <CategoryInfo ref={categoryInfoRef} isVisible={visibleElements.categoryInfo}>
           <Description>{currentCategory.detailedDesc}</Description>
           <Subcategories>
             <SubcategoryTitle>Our {currentCategory.title} Range Includes:</SubcategoryTitle>
             <SubcategoryList>
               {currentCategory.subcategories.map((subcategory, index) => (
-                <SubcategoryItem key={index}>{subcategory}</SubcategoryItem>
+                <SubcategoryItem 
+                  key={index}
+                  ref={el => subcategoryItemRefs.current[index] = el}
+                  isVisible={visibleElements[`subcategoryItem-${index}`]}
+                  index={index}
+                >
+                  {subcategory}
+                </SubcategoryItem>
               ))}
             </SubcategoryList>
           </Subcategories>
         </CategoryInfo>
       )}
 
-      <FilterContainer>
+      <FilterContainer ref={filterContainerRef} isVisible={visibleElements.filterContainer}>
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>

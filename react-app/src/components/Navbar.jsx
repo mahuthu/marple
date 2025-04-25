@@ -10,7 +10,8 @@ import { categories } from '../data';
 
 const Container = styled.div`
   height: 100px;
-  ${mobile({ height: 'auto' })}
+  position: relative;
+  ${mobile({ height: 'auto', minHeight: '80px' })}
 `;
 
 const Wrapper = styled.div`
@@ -18,51 +19,32 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ padding: '15px 10px', flexWrap: 'wrap' })}
+  position: relative;
+  ${mobile({ 
+    padding: '10px 15px',
+    flexWrap: 'nowrap',
+    minHeight: '80px'
+  })}
 `;
 
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  @media only screen and (max-width: 380px) {
-    margin-right: 10px;
-  }
-`;
-
-const MenuIconContainer = styled.div`
-  margin-right: 20px;
-  ${mobile({ marginRight: '15px' })}
+  ${mobile({
+    justifyContent: 'flex-start',
+    flex: '1'
+  })}
 `;
 
 const LogoContainer = styled.div`
   margin-left: 10px;
-  ${mobile({ marginLeft: '5px' })}
-`;
-
-const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 25px;
-  padding: 5px;
-  @media only screen and (max-width: 380px) {
-    margin-left: 15px;
-  }
-`;
-
-const Input = styled.input`
-  border: none;
-  ${mobile({ width: '50px' })}
-`;
-
-const Center = styled.div`
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  @media only screen and (max-width: 380px) {
-    margin-left: 10px;
-  }
+  ${mobile({ 
+    marginLeft: '0',
+    display: 'flex',
+    alignItems: 'center',
+    height: '100%'
+  })}
 `;
 
 const Logo = styled.div`
@@ -74,10 +56,52 @@ const LogoImage = styled.img`
   height: 90px;
   max-width: 100%;
   object-fit: contain;
-  ${mobile({ height: '55px' })}
+  ${mobile({ height: '75px' })}
   @media only screen and (max-width: 380px) {
-    height: 45px;
+    height: 70px;
   }
+`;
+
+const Center = styled.div`
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${mobile({ 
+    flex: '2',
+    order: '2'
+  })}
+`;
+
+const SearchContainer = styled.div`
+  border: 0.5px solid lightgray;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  padding: 5px;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+  ${mobile({ 
+    margin: '0 10px',
+    maxWidth: '100%'
+  })}
+  @media only screen and (max-width: 380px) {
+    margin: 0 5px;
+  }
+`;
+
+const Input = styled.input`
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  ${mobile({ 
+    width: '100%',
+    fontSize: '13px',
+    padding: '3px'
+  })}
 `;
 
 const Right = styled.div`
@@ -85,7 +109,11 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  ${mobile({ justifyContent: 'center', marginTop: '10px' })}
+  ${mobile({ 
+    flex: '1',
+    order: '3',
+    justifyContent: 'flex-end'
+  })}
 `;
 
 const MenuItem = styled.div`
@@ -95,49 +123,85 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: '12px', marginLeft: '10px' })}
 `;
 
-const MenuIcon = styled(Menu)`
+const DesktopMenuItem = styled(MenuItem)`
+  ${mobile({ display: 'none' })}
+`;
+
+const MobileCartItem = styled(MenuItem)`
   display: none;
-  ${mobile({ display: 'block', marginRight: '10px', cursor: 'pointer' })}
+  ${mobile({ 
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: '15px'
+  })}
+`;
+
+const MobileMenuItem = styled.div`
+  padding: 12px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+  
+  &:hover {
+    background-color: #f5f5f5;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const MobileMenuToggle = styled.div`
+  display: none;
+  cursor: pointer;
+  
+  ${mobile({ 
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: '15px',
+    padding: '5px'
+  })}
+`;
+
+const MenuIcon = styled(Menu)`
+  font-size: 28px;
+  color: #333;
 `;
 
 const CloseIcon = styled(Close)`
-  display: none;
-  ${mobile({ display: 'block', marginRight: '10px', cursor: 'pointer' })}
+  font-size: 28px;
+  color: #333;
 `;
 
-const MobileMenu = styled.div`
-  display: none;
-  ${mobile({
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    width: '100%',
-    padding: '10px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  })}
+const MobileMenuContainer = styled.div`
+  display: ${props => props.isOpen ? 'block' : 'none'};
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
 `;
 
 const DesktopMenu = styled.div`
   display: ${props => props.isOpen ? 'block' : 'none'};
   position: absolute;
-  top: 100px;
+  top: 70px;
   right: 30px;
   background-color: white;
   width: 200px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   z-index: 100;
-  ${mobile({ display: 'none' })}
-`;
-
-const MobileMenuItem = styled(MenuItem)`
-  ${mobile({
-    margin: '10px 0',
-    fontSize: '16px',
-  })}
-`;
-
-const DesktopMenuItem = styled(MenuItem)`
+  border-radius: 5px;
   ${mobile({ display: 'none' })}
 `;
 
@@ -152,6 +216,7 @@ const MenuItemLink = styled.div`
 const ProductsDropdown = styled.div`
   position: relative;
   display: inline-block;
+  ${mobile({ display: 'none' })}
 `;
 
 const DropdownContent = styled.div`
@@ -181,6 +246,25 @@ const DropdownItem = styled(Link)`
   }
 `;
 
+// Mobile category item with indentation
+const MobileCategoryItem = styled(Link)`
+  display: block;
+  padding: 12px 15px 12px 30px;
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  
+  &:hover {
+    background-color: #f0f0f0;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
 const ContactButton = styled(Link)`
   text-decoration: none;
   color: white;
@@ -197,11 +281,7 @@ const ContactButton = styled(Link)`
     transform: translateY(-2px);
   }
 
-  ${mobile({ 
-    fontSize: '12px',
-    padding: '6px 12px',
-    marginLeft: '10px'
-  })}
+  ${mobile({ display: 'none' })}
 `;
 
 const Navbar = () => {
@@ -216,6 +296,7 @@ const Navbar = () => {
   const desktopMenuRef = useRef(null);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -224,6 +305,12 @@ const Navbar = () => {
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsProductsOpen(false);
+      }
+      // Close mobile menu when clicking outside
+      if (mobileMenuRef.current && 
+          !mobileMenuRef.current.contains(event.target) &&
+          !event.target.closest('[data-mobile-toggle]')) {
+        setMobileMenuOpen(false);
       }
     };
 
@@ -252,6 +339,7 @@ const Navbar = () => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/search?term=${encodeURIComponent(searchTerm)}`);
+      setSearchTerm(''); // Clear search after submission
     }
   };
 
@@ -259,39 +347,44 @@ const Navbar = () => {
     setIsProductsOpen(!isProductsOpen);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <Container>
       <Wrapper>
+        {/* Left side - Logo */}
         <Left>
-          <MenuIconContainer>
-            {mobileMenuOpen ? (
-              <CloseIcon onClick={toggleMobileMenu} />
-            ) : (
-              <MenuIcon onClick={toggleMobileMenu} />
-            )}
-          </MenuIconContainer>
           <LogoContainer>
-            <Logo>
-              <LogoImage src="/images/marple1.jpg" alt="KOFIA_KE Logo" />
-            </Logo>
+            <Link to="/" onClick={closeMobileMenu}>
+              <Logo>
+                <LogoImage src="/images/marple1.jpg" alt="KOFIA_KE Logo" />
+              </Logo>
+            </Link>
           </LogoContainer>
         </Left>
+
+        {/* Center - Search bar */}
         <Center>
           <SearchContainer>
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', width: '100%' }}>
               <Input 
-                placeholder="search" 
+                placeholder="Search products..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Search 
-                style={{ color: 'gray', fontSize: 16, cursor: 'pointer' }} 
+                style={{ color: 'gray', fontSize: 16, cursor: 'pointer', padding: '0 5px' }} 
                 onClick={handleSearch}
               />
             </form>
           </SearchContainer>
         </Center>
+
+        {/* Right side - Menu items (desktop) & hamburger (mobile) */}
         <Right>
+          {/* Desktop-only menu items */}
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
             <DesktopMenuItem>HOME</DesktopMenuItem>
           </Link>
@@ -316,17 +409,33 @@ const Navbar = () => {
           </ProductsDropdown>
           <ContactButton to="/contact">CONTACT</ContactButton>
           <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MenuItem>
+            <DesktopMenuItem>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
-            </MenuItem>
+            </DesktopMenuItem>
           </Link>
           <DesktopMenuItem onClick={toggleDesktopMenu}>
             <Person />
           </DesktopMenuItem>
+
+          {/* Mobile-only cart icon - displayed outside the mobile menu */}
+          <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <MobileCartItem>
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </MobileCartItem>
+          </Link>
+
+          {/* Mobile menu toggle (hamburger/close) */}
+          <MobileMenuToggle onClick={toggleMobileMenu} data-mobile-toggle>
+            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </MobileMenuToggle>
         </Right>
       </Wrapper>
+
+      {/* Desktop user dropdown menu */}
       <DesktopMenu ref={desktopMenuRef} isOpen={desktopMenuOpen}>
         {currentUser ? (
           <>
@@ -351,54 +460,54 @@ const Navbar = () => {
           </>
         )}
       </DesktopMenu>
-      {mobileMenuOpen && (
-        <MobileMenu>
-          <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MobileMenuItem>About Us</MobileMenuItem>
-          </Link>
-          <MobileMenuItem onClick={() => setMobileMenuOpen(false)}>
-            Products
-            {categories.map((category) => (
-              <DropdownItem 
-                key={category.id} 
-                to={`/products/${category.cat}`}
-                style={{ paddingLeft: '20px' }}
-              >
-                {category.title}
-              </DropdownItem>
-            ))}
-          </MobileMenuItem>
-          <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MobileMenuItem>Contacts</MobileMenuItem>
-          </Link>
-          {currentUser ? (
-            <>
-              <MobileMenuItem onClick={handleLogout}>Sign Out</MobileMenuItem>
-              <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+
+      {/* Mobile menu dropdown */}
+      <MobileMenuContainer isOpen={mobileMenuOpen} ref={mobileMenuRef}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+          <MobileMenuItem>Home</MobileMenuItem>
+        </Link>
+        <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+          <MobileMenuItem>About Us</MobileMenuItem>
+        </Link>
+        <MobileMenuItem>Products</MobileMenuItem>
+        {categories.map((category) => (
+          <MobileCategoryItem 
+            key={category.id} 
+            to={`/products/${category.cat}`}
+            onClick={closeMobileMenu}
+          >
+            {category.title}
+          </MobileCategoryItem>
+        ))}
+        <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+          <MobileMenuItem>Contact</MobileMenuItem>
+        </Link>
+        {/* Removed cart from mobile menu since it's now in the header */}
+        {currentUser ? (
+          <>
+            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+              <MobileMenuItem>Profile</MobileMenuItem>
+            </Link>
+            {wishlist.length > 0 && (
+              <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
                 <MobileMenuItem>
-                  <Person />
+                  Wishlist ({wishlist.length})
                 </MobileMenuItem>
               </Link>
-              {wishlist.length > 0 && (
-                <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <MobileMenuItem>
-                    Your Wishlist ({wishlist.length})
-                  </MobileMenuItem>
-                </Link>
-              )}
-            </>
-          ) : (
-            <>
-              <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <MobileMenuItem>Register</MobileMenuItem>
-              </Link>
-              <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <MobileMenuItem>Sign In</MobileMenuItem>
-              </Link>
-            </>
-          )}
-        </MobileMenu>
-      )}
+            )}
+            <MobileMenuItem onClick={handleLogout}>Sign Out</MobileMenuItem>
+          </>
+        ) : (
+          <>
+            <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+              <MobileMenuItem>Register</MobileMenuItem>
+            </Link>
+            <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
+              <MobileMenuItem>Sign In</MobileMenuItem>
+            </Link>
+          </>
+        )}
+      </MobileMenuContainer>
     </Container>
   );
 };

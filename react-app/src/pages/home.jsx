@@ -11,6 +11,7 @@ import Milestones from "../components/Milestones"
 import Testimonials from "../components/Testimonials"
 import Projects from "../components/Projects"
 import Subscription from "../components/Subscription"
+import CTA  from "../components/CallToAction"
 
 const Home = () => {
   return (
@@ -23,7 +24,8 @@ const Home = () => {
       <Milestones/>
       <Projects/>
       <Testimonials/>
-      <Subscription/>
+      <CTA/>
+      {/* <Subscription/> */}
       {/* <Products/> */}
       {/* <Newsletter/> */}
       <Footer/>

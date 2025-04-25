@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import { Link } from 'react-router-dom';
@@ -33,6 +33,9 @@ const Title = styled.h2`
   padding-bottom: 15px;
   font-weight: 600;
   letter-spacing: 1px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
 
   &::after {
     content: '';
@@ -55,6 +58,10 @@ const Description = styled.p`
   margin-bottom: 35px;
   line-height: 1.8;
   font-weight: 400;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: 0.1s;
 `;
 
 const ContactButton = styled(Link)`
@@ -70,10 +77,14 @@ const ContactButton = styled(Link)`
   transition: all 0.3s ease;
   margin-bottom: 35px;
   letter-spacing: 0.5px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
+  transition: opacity 0.7s ease, transform 0.7s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  transition-delay: 0.2s;
 
   &:hover {
     background-color: #6d1d24;
-    transform: translateY(-2px);
+    transform: ${props => props.isVisible ? 'translateY(-2px)' : 'translateY(20px)'};
     box-shadow: 0 4px 8px rgba(142, 38, 47, 0.2);
   }
 `;
@@ -82,6 +93,9 @@ const SocialIcons = styled.div`
   display: flex;
   gap: 25px;
   margin-top: 15px;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transition: opacity 0.7s ease;
+  transition-delay: 0.3s;
 `;
 
 const SocialIcon = styled.a`
@@ -89,6 +103,9 @@ const SocialIcon = styled.a`
   font-size: 1.5rem;
   transition: all 0.3s ease;
   opacity: 0.8;
+  transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(10px)'};
+  transition: transform 0.5s ease, color 0.3s ease, opacity 0.3s ease;
+  transition-delay: ${props => `${0.3 + props.index * 0.1}s`};
 
   &:hover {
     color: #8e262f;
@@ -98,30 +115,124 @@ const SocialIcon = styled.a`
 `;
 
 const CallToAction = () => {
+  const [visibleElements, setVisibleElements] = useState({});
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const buttonRef = useRef(null);
+  const socialIconsRef = useRef(null);
+  const iconRefs = useRef([]);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.dataset.id;
+          setVisibleElements(prev => ({ ...prev, [id]: true }));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    if (titleRef.current) {
+      titleRef.current.dataset.id = 'title';
+      observer.observe(titleRef.current);
+    }
+    if (descriptionRef.current) {
+      descriptionRef.current.dataset.id = 'description';
+      observer.observe(descriptionRef.current);
+    }
+    if (buttonRef.current) {
+      buttonRef.current.dataset.id = 'button';
+      observer.observe(buttonRef.current);
+    }
+    if (socialIconsRef.current) {
+      socialIconsRef.current.dataset.id = 'socialIcons';
+      observer.observe(socialIconsRef.current);
+    }
+
+    iconRefs.current.forEach((ref, index) => {
+      if (ref) {
+        ref.dataset.id = `icon-${index}`;
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <Container>
       <Wrapper>
-        <Title>Let's Get Connected</Title>
-        <Description>
+        <Title ref={titleRef} isVisible={visibleElements.title}>Let's Get Connected</Title>
+        <Description ref={descriptionRef} isVisible={visibleElements.description}>
           Please reach out to us, we want to guide and advise you on our products. 
           We are available on social media, WhatsApp, Email and Call. Don't hesitate 
           please ask all your questions to our customer service team.
         </Description>
-        <ContactButton to="/contact">Contact Us</ContactButton>
-        <SocialIcons>
-          <SocialIcon href="https://wa.me/254721917816" target="_blank" rel="noopener noreferrer">
+        <ContactButton 
+          ref={buttonRef} 
+          isVisible={visibleElements.button} 
+          to="/contact"
+        >
+          Contact Us
+        </ContactButton>
+        <SocialIcons ref={socialIconsRef} isVisible={visibleElements.socialIcons}>
+          <SocialIcon 
+            ref={el => iconRefs.current[0] = el} 
+            isVisible={visibleElements['icon-0']} 
+            index={0}
+            href="https://wa.me/254721917816" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <WhatsAppIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon href="https://www.facebook.com/woodproductskenya" target="_blank" rel="noopener noreferrer">
+          <SocialIcon 
+            ref={el => iconRefs.current[1] = el} 
+            isVisible={visibleElements['icon-1']} 
+            index={1}
+            href="https://www.facebook.com/woodproductskenya" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <FacebookIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon href="https://www.instagram.com/woodproductskenya" target="_blank" rel="noopener noreferrer">
+          <SocialIcon 
+            ref={el => iconRefs.current[2] = el} 
+            isVisible={visibleElements['icon-2']} 
+            index={2}
+            href="https://www.instagram.com/woodproductskenya" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <InstagramIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon href="https://www.youtube.com/woodproductskenya" target="_blank" rel="noopener noreferrer">
+          <SocialIcon 
+            ref={el => iconRefs.current[3] = el} 
+            isVisible={visibleElements['icon-3']} 
+            index={3}
+            href="https://www.youtube.com/woodproductskenya" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <YouTubeIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon href="https://www.linkedin.com/company/woodproductskenya" target="_blank" rel="noopener noreferrer">
+          <SocialIcon 
+            ref={el => iconRefs.current[4] = el} 
+            isVisible={visibleElements['icon-4']} 
+            index={4}
+            href="https://www.linkedin.com/company/woodproductskenya" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <LinkedInIcon fontSize="medium" />
           </SocialIcon>
         </SocialIcons>

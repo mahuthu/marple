@@ -72,8 +72,8 @@ const Milestones = () => {
   const containerRef = useRef(null);
   
   const milestones = [
-    { id: 1, number: 75, label: "Years In Industry", suffix: "+" },
-    { id: 2, number: 100, label: "Employees" },
+    { id: 1, number: 7, label: "Years In Industry", suffix: "+" },
+    { id: 2, number: 10, label: "Employees" },
     { id: 3, number: 150, label: "Satisfied Clients", suffix: "+" },
     { id: 4, number: 5000, label: "SQM Factory Space" }
   ];
