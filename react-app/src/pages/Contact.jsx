@@ -601,6 +601,7 @@ const Contact = () => {
             style={{ border: 0 }} 
             allowFullScreen="" 
             loading="lazy"
+            title="Marple Wood Products Location Map"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </MapSection>

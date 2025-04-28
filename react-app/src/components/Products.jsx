@@ -24,8 +24,8 @@ const Container = styled.div`
           try {
             const res = await axios.get(
               cat
-                ? `http://20.121.40.132/api/products?category=${cat}`
-                : "http://20.121.40.132/api/products"
+                ? `https://marplewoodproducts/api/products?category=${cat}`
+                : "http://marplewoodproducts/api/products"
             );
             console.log("Products:", res.data);
             setProducts(res.data);
