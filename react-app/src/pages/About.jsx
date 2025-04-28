@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Announcement from '../components/Announcement';
 
 // Styled components
 const Container = styled.div`
@@ -339,6 +340,7 @@ const About = () => {
 
   return (
     <Container>
+      <Announcement/>
       <Navbar />
       <HeroSection>
         <div>

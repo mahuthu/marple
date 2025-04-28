@@ -18,7 +18,7 @@ const Container = styled.div`
 const Announcement = () => {
   return (
     <Container>
-        Free delivery for orders in and around Nairobi
+        {/* Free delivery for orders in and around Nairobi */}
     </Container>
   )
 }

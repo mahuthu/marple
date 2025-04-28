@@ -105,21 +105,21 @@ const Testimonials = () => {
       quote: "Very superior products, an excellent range of products from doors to prefabricated homes. Would definitely recommend this company for people who want all sorts of wood products, kitchens or wardrobes. Keep up the excellent work will be back soon to by more products from you.",
       name: "Andy Muchiri",
       title: "Buyer",
-      image: "/images/testimonial1.jpg"
+      image: "/images/people1.jpeg"
     },
     {
       id: 2,
       quote: "This is a great place, special wood products, made in Kenya. I was impressed with the quality and wide range of products.",
       name: "Patrick Balla",
       title: "Buyer",
-      image: "/images/testimonial2.jpg"
+      image: "/images/people2.jpeg"
     },
     {
       id: 3,
       quote: "Amazing work they do.. Flooring, cabinets and wardrobe and any wooden fittings you can imagine, Bravo👏",
       name: "Lynn Makenzi",
       title: "Buyer",
-      image: "/images/testimonial3.jpg"
+      image: "/images/people3.jpeg"
     }
   ];
   

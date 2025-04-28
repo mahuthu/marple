@@ -221,8 +221,8 @@ const ProductList = () => {
 
   return (
     <Container>
+      <Announcement/>
       <Navbar />
-      <Announcement />
       <HeroSection>
         <BackgroundImage image={currentCategory?.img} />
         <Title ref={titleRef} isVisible={visibleElements.title}>

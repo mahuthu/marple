@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
-import Newsletter from '../components/Newsletter';
+// import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Announcement from '../components/Announcement';
 import { Add, Remove } from '@material-ui/icons';
@@ -393,8 +393,8 @@ const Product = () => {
 
     return (
         <Container>
+            <Announcement/>
             <Navbar />
-            <Announcement />
             <Wrapper>
                 <ImgContainer>
                     <Image src={product.imageUrl} alt={product.title} />

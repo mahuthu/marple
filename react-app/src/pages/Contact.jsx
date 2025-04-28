@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
+import Announcement1 from '../components/Announcement';
 import Footer from '../components/Footer';
 import { 
   LocationOn, 
@@ -13,6 +14,7 @@ import {
   YouTube,
   LinkedIn
 } from '@mui/icons-material';
+// import { Announcement } from '@material-ui/icons';
 
 const Container = styled.div`
   width: 100%;
@@ -388,6 +390,8 @@ const Contact = () => {
 
   return (
     <Container>
+      <Announcement1/>
+
       <Navbar />
       
       <HeroSection>
