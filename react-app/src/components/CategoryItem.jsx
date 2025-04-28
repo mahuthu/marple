@@ -23,10 +23,18 @@ const Container = styled.div`
   }
   
   ${mobile({
-    flex: "0 0 calc(50% - 20px)",
-    height: "40vh",
-    margin: "10px",
+    flex: "0 0 100%",
+    height: "50vh",
+    margin: "10px 0"
   })}
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
 `;
 
 const Image = styled.img`
@@ -40,7 +48,7 @@ const Image = styled.img`
   }
 `;
 
-const Info = styled.div`
+const ImageOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -50,18 +58,10 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
-  text-align: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.4);
-  transition: background-color 0.3s ease;
-  
-  ${Container}:hover & {
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-  
-  ${mobile({ padding: "15px" })}
+  color: white;
 `;
 
 const Title = styled.h1`
@@ -69,10 +69,11 @@ const Title = styled.h1`
   font-size: 24px;
   font-weight: 600;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-align: center;
   
   ${mobile({
-    fontSize: "1.1rem",
-    marginBottom: "8px",
+    fontSize: "1.2rem",
+    marginBottom: "8px"
   })}
 `;
 
@@ -82,12 +83,13 @@ const Description = styled.p`
   line-height: 1.4;
   max-width: 85%;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
   
   ${mobile({
-    fontSize: "0.75rem",
-    lineHeight: "1.3",
+    fontSize: "0.9rem",
+    lineHeight: "1.4",
     maxWidth: "90%",
-    marginBottom: "12px",
+    marginBottom: "12px"
   })}
 `;
 
@@ -114,10 +116,9 @@ const Button = styled.button`
   }
 
   ${mobile({
-    padding: "5px 10px",
-    fontSize: "0.7rem",
-    fontWeight: "500",
-    borderWidth: "1px"
+    padding: "8px 16px",
+    fontSize: "0.8rem",
+    fontWeight: "500"
   })}
 `;
 
@@ -151,12 +152,14 @@ const CategoryItem = ({ item }) => {
   return (
     <Container ref={containerRef} isVisible={isVisible}>
       <Link to={`/products/${item.cat}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <Image src={item.img} alt={item.title} />
-        <Info>
-          <Title>{item.title}</Title>
-          <Description>{item.desc}</Description>
-          <Button>SHOP NOW</Button>
-        </Info>
+        <ImageWrapper>
+          <Image src={item.img} alt={item.title} />
+          <ImageOverlay>
+            <Title>{item.title}</Title>
+            <Description>{item.desc}</Description>
+            <Button>SHOP NOW</Button>
+          </ImageOverlay>
+        </ImageWrapper>
       </Link>
     </Container>
   );

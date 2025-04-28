@@ -45,7 +45,21 @@ const MilestoneItem = styled.div`
     transform: translateY(-10px);
   }
   
-  ${mobile({ marginBottom: "40px" })}
+  ${mobile({ 
+    marginBottom: "40px",
+    position: "relative",
+    "&:not(:last-child)::after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-20px",
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "50%",
+      height: "1px",
+      backgroundColor: "white",
+      opacity: "0.5"
+    }
+  })}
 `;
 
 const Number = styled.div`

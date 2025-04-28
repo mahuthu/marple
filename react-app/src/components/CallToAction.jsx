@@ -9,10 +9,19 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Container = styled.div`
-  background-color: #f9f9f9;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/floors4.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 80px 0;
   margin: 40px 0;
   font-family: 'Montserrat', sans-serif;
+  color: white;
+
+  ${mobile({
+    padding: "60px 0",
+    margin: "30px 0"
+  })}
 `;
 
 const Wrapper = styled.div`
@@ -27,7 +36,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   font-size: 2.2rem;
-  color: #333;
+  color: white;
   margin-bottom: 20px;
   position: relative;
   padding-bottom: 15px;
@@ -53,7 +62,7 @@ const Title = styled.h2`
 
 const Description = styled.p`
   font-size: 1rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
   max-width: 700px;
   margin-bottom: 35px;
   line-height: 1.8;
@@ -99,7 +108,7 @@ const SocialIcons = styled.div`
 `;
 
 const SocialIcon = styled.a`
-  color: #333;
+  color: white;
   font-size: 1.5rem;
   transition: all 0.3s ease;
   opacity: 0.8;
