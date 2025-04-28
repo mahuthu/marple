@@ -20,7 +20,7 @@ const Container = styled.div`
 
 const HeroSection = styled.div`
   height: 40vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/contact-hero.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/contactus.jpg');
   background-size: cover;
   background-position: center;
   display: flex;

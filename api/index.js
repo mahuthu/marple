@@ -35,7 +35,6 @@ const allowedOrigins = [
   ];
 
 // CORS configuration with dynamic origin handling
-
 app.use(cors({
   origin: function (origin, callback) {
     console.log("Request origin:", origin);
@@ -51,6 +50,8 @@ app.use(cors({
     }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 }));
 // app.use(cors({

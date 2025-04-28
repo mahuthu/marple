@@ -24,13 +24,15 @@ const Container = styled.div`
           try {
             const res = await axios.get(
               cat
-                ? `https://marplewoodproducts/api/products?category=${cat}`
-                : "http://marplewoodproducts/api/products"
+                ? `https://marplewoodproducts.co.ke/api/products?category=${cat}`
+                : "https://marplewoodproducts.co.ke/api/products"
             );
             console.log("Products:", res.data);
             setProducts(res.data);
           } catch (err) {
-            console.log("Error fetching products",)
+            console.log("Error fetching products:", err);
+            // Set empty array on error to prevent undefined errors
+            setProducts([]);
           }
         };
         getProducts();
