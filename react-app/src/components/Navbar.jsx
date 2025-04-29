@@ -140,19 +140,36 @@ const MobileMenuItem = styled.div`
   padding: 12px 15px;
   font-size: 16px;
   cursor: pointer;
-  color: #333;
-  border-bottom: 1px solid #eee;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
-  transition: background-color 0.3s;
+  justify-content: space-between;
+  transition: all 0.3s ease;
   
   &:hover {
-    background-color: #f5f5f5;
+    background-color: rgba(255,255,255,0.1);
   }
   
   &:last-child {
     border-bottom: none;
   }
+`;
+
+const MobileDropdownIcon = styled.div`
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+  transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0)'};
+  color: #fff;
+`;
+
+const MobileDropdownMenu = styled.div`
+  display: ${props => props.isOpen ? 'block' : 'none'};
+  background-color: rgba(0,0,0,0.2);
+  padding-left: 15px;
+  transition: all 0.3s ease;
+  max-height: ${props => props.isOpen ? '500px' : '0'};
+  overflow: hidden;
 `;
 
 const MobileMenuToggle = styled.div`
@@ -184,11 +201,12 @@ const MobileMenuContainer = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: #1a1a1a;
   width: 100%;
   padding: 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   z-index: 1000;
+  border-top: 1px solid rgba(255,255,255,0.1);
 `;
 
 const DesktopMenu = styled.div`
@@ -251,13 +269,14 @@ const MobileCategoryItem = styled(Link)`
   display: block;
   padding: 12px 15px 12px 30px;
   text-decoration: none;
-  color: #555;
+  color: #fff;
   font-size: 15px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
   
   &:hover {
-    background-color: #f0f0f0;
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
   }
   
   &:last-child {
@@ -294,7 +313,7 @@ const Navbar = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const desktopMenuRef = useRef(null);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
 
@@ -304,7 +323,7 @@ const Navbar = () => {
         setDesktopMenuOpen(false);
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsProductsOpen(false);
+        setIsProductsDropdownOpen(false);
       }
       // Close mobile menu when clicking outside
       if (mobileMenuRef.current && 
@@ -344,10 +363,15 @@ const Navbar = () => {
   };
 
   const toggleProductsDropdown = () => {
-    setIsProductsOpen(!isProductsOpen);
+    setIsProductsDropdownOpen(!isProductsDropdownOpen);
   };
 
   const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const handleCategoryClick = () => {
+    setIsProductsDropdownOpen(false);
     setMobileMenuOpen(false);
   };
 
@@ -395,12 +419,12 @@ const Navbar = () => {
             <DesktopMenuItem onClick={toggleProductsDropdown}>
               PRODUCTS
             </DesktopMenuItem>
-            <DropdownContent isOpen={isProductsOpen}>
+            <DropdownContent isOpen={isProductsDropdownOpen}>
               {categories.map((category) => (
                 <DropdownItem 
                   key={category.id} 
                   to={`/products/${category.cat}`}
-                  onClick={() => setIsProductsOpen(false)}
+                  onClick={() => setIsProductsDropdownOpen(false)}
                 >
                   {category.title}
                 </DropdownItem>
@@ -469,16 +493,21 @@ const Navbar = () => {
         <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
           <MobileMenuItem>About Us</MobileMenuItem>
         </Link>
-        <MobileMenuItem>Products</MobileMenuItem>
-        {categories.map((category) => (
-          <MobileCategoryItem 
-            key={category.id} 
-            to={`/products/${category.cat}`}
-            onClick={closeMobileMenu}
-          >
-            {category.title}
-          </MobileCategoryItem>
-        ))}
+        <MobileMenuItem onClick={toggleProductsDropdown}>
+          Products
+          <MobileDropdownIcon isOpen={isProductsDropdownOpen}>›</MobileDropdownIcon>
+        </MobileMenuItem>
+        <MobileDropdownMenu isOpen={isProductsDropdownOpen}>
+          {categories.map((category) => (
+            <MobileCategoryItem 
+              key={category.id} 
+              to={`/products/${category.cat}`}
+              onClick={handleCategoryClick}
+            >
+              {category.title}
+            </MobileCategoryItem>
+          ))}
+        </MobileDropdownMenu>
         <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
           <MobileMenuItem>Contact</MobileMenuItem>
         </Link>
