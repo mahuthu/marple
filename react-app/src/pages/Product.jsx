@@ -18,9 +18,16 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div` 
-    padding: 50px;
+    padding: 30px;
     display: flex;
-    ${mobile({ padding: "20px", flexDirection: "column" })}
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+    ${mobile({ 
+        padding: "15px", 
+        flexDirection: "column",
+        gap: "20px"
+    })}
 `;
 
 const ImgContainer = styled.div`
@@ -29,105 +36,102 @@ const ImgContainer = styled.div`
     justify-content: center;
     align-items: center;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    ${mobile({ marginBottom: "20px" })}
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 15px;
+    ${mobile({ marginBottom: "15px" })}
 `;
 
 const Image = styled.img`
     width: 100%;
-    height: 70vh;
+    height: 60vh;
     object-fit: contain;
-    border-radius: 5px;
-    ${mobile({ height: "40vh" })}
+    border-radius: 4px;
+    ${mobile({ height: "35vh" })}
 `;
 
 const InfoContainer = styled.div`
     flex: 1;
-    padding: 0px 50px;
-    ${mobile({ padding: "20px" })}
+    padding: 0 20px;
+    ${mobile({ padding: "0" })}
 `;
 
 const Title = styled.h1`
     font-weight: 600;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 
     &::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 100px;
-        height: 3px;
+        width: 60px;
+        height: 2px;
         background-color: #8e262f;
     }
 
-    ${mobile({ fontSize: "1.8rem" })}
+    ${mobile({ fontSize: "1.6rem" })}
 `;
 
 const Desc = styled.p`
-    margin: 30px 0px;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    margin: 20px 0;
+    font-size: 1rem;
+    line-height: 1.5;
     color: #666;
-    ${mobile({ fontSize: "1rem" })}
+    ${mobile({ fontSize: "0.95rem" })}
 `;
 
 const Price = styled.span`
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #8e262f;
-    ${mobile({ fontSize: "1.5rem" })}
+    ${mobile({ fontSize: "1.4rem" })}
 `;
 
 const FilterContainer = styled.div`
     width: 100%;
-    margin: 30px 0px;
+    margin: 20px 0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
+    gap: 15px;
     background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 `;
 
 const Filter = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 15px;
     background: #f9f9f9;
-    padding: 15px 20px;
-    border-radius: 8px;
+    padding: 12px 15px;
+    border-radius: 6px;
     border: 1px solid #eee;
     transition: all 0.3s ease;
 
     &:hover {
         border-color: #8e262f;
-        box-shadow: 0 2px 8px rgba(142, 38, 47, 0.1);
+        box-shadow: 0 2px 6px rgba(142, 38, 47, 0.1);
     }
 `;
 
 const FilterTitle = styled.span`
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
-    margin-right: 15px;
     color: #333;
-    min-width: 80px;
+    min-width: 60px;
 `;
 
 const FilterColor = styled.div`
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background-color: ${props => props.color};
-    margin: 0px 8px;
     cursor: pointer;
     border: 2px solid #ddd;
     transition: all 0.3s ease;
@@ -141,10 +145,10 @@ const FilterColor = styled.div`
     &::after {
         content: '';
         position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
         border: 2px solid #8e262f;
         border-radius: 50%;
         opacity: 0;
@@ -157,20 +161,20 @@ const FilterColor = styled.div`
 `;
 
 const FilterSize = styled.select`
-    padding: 10px 20px;
+    padding: 8px 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: white;
     color: #333;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 120px;
+    min-width: 100px;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238e262f'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 20px;
+    background-position: right 8px center;
+    background-size: 16px;
 
     &:focus {
         outline: none;
@@ -181,67 +185,6 @@ const FilterSize = styled.select`
     &:hover {
         border-color: #8e262f;
     }
-
-    option {
-        padding: 10px;
-        background-color: white;
-        color: #333;
-        cursor: pointer;
-    }
-
-    option:checked {
-        background-color: #8e262f !important;
-        color: white;
-    }
-
-    option:hover {
-        background-color: #8e262f !important;
-        color: white;
-    }
-
-    option:checked:hover {
-        background-color: #6e1e25 !important;
-        color: white;
-    }
-
-    &::-ms-expand {
-        display: none;
-    }
-
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #8e262f;
-        border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: #6e1e25;
-    }
-`;
-
-const FilterSizeOption = styled.option`
-    padding: 10px;
-    background-color: white;
-    color: #333;
-    cursor: pointer;
-
-    &:checked {
-        background-color: #8e262f !important;
-        color: white;
-    }
-
-    &:hover {
-        background-color: #8e262f !important;
-        color: white;
-    }
 `;
 
 const AddContainer = styled.div`
@@ -249,36 +192,35 @@ const AddContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 30px;
+    margin-top: 20px;
     background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    ${mobile({ flexDirection: "column", gap: "15px" })}
 `;
 
 const AmountContainer = styled.div`
     display: flex;
     align-items: center;
     font-weight: 700;
-    margin-bottom: 20px;
     background: #f9f9f9;
-    padding: 10px 15px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
     border: 1px solid #eee;
 `;
 
 const Amount = styled.span`
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
     border: 2px solid #8e262f;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0px 10px;
+    margin: 0 8px;
     color: #8e262f;
-    font-size: 1.2rem;
+    font-size: 1rem;
     background: white;
     transition: all 0.3s ease;
 
@@ -289,14 +231,14 @@ const Amount = styled.span`
 `;
 
 const Button = styled.button`
-    padding: 10px 24px;
+    padding: 8px 20px;
     border: 2px solid #8e262f;
     background-color: #8e262f;
     color: white;
     cursor: pointer;
     font-weight: 500;
-    font-size: 0.95rem;
-    border-radius: 6px;
+    font-size: 0.9rem;
+    border-radius: 4px;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -309,7 +251,7 @@ const Button = styled.button`
         background-color: white;
         color: #8e262f;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(142, 38, 47, 0.2);
+        box-shadow: 0 4px 8px rgba(142, 38, 47, 0.2);
     }
 
     &:disabled {
@@ -322,27 +264,26 @@ const Button = styled.button`
     }
 
     ${mobile({ 
-        width: "100%", 
-        marginTop: "15px",
-        padding: "12px 20px",
-        fontSize: "1rem" 
+        width: "auto",
+        minWidth: "120px",
+        padding: "6px 15px"
     })}
 `;
 
 const CountInStock = styled.p`
-    margin-top: 10px;
-    font-size: 1rem;
+    margin-top: 8px;
+    font-size: 0.9rem;
     color: ${props => props.inStock ? "#4CAF50" : "#f44336"};
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 
     &::before {
         content: '';
         display: inline-block;
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
         background-color: ${props => props.inStock ? "#4CAF50" : "#f44336"};
     }
@@ -404,9 +345,7 @@ const Product = () => {
                     <Desc>{product.description}</Desc>
                     <Price>KSH{product.price}</Price>
                     <CountInStock inStock={product.countInStock > 0}>
-                        {product.countInStock > 0 
-                            ? `In Stock: ${product.countInStock}`
-                            : "Out of Stock"}
+                        {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                     </CountInStock>
                     <FilterContainer>
                         <Filter>
@@ -418,9 +357,9 @@ const Product = () => {
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
                             <FilterSize onChange={(e) => setSize(e.target.value)}>
-                                <FilterSizeOption>Select Size</FilterSizeOption>
+                                <option value="">Select Size</option>
                                 {Array.isArray(product.size) && product.size.map((s) => (
-                                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                    <option key={s} value={s}>{s}</option>
                                 ))}
                             </FilterSize>
                         </Filter>
