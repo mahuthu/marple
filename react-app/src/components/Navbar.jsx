@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Search, ShoppingCartOutlined, Person, Menu, Close } from '@material-ui/icons';
+import { Search, ShoppingCartOutlined, Person, Menu, Close, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import { Badge } from '@material-ui/core';
 import { mobile } from '../responsive';
 import { useSelector, useDispatch } from 'react-redux';
@@ -140,36 +140,20 @@ const MobileMenuItem = styled.div`
   padding: 12px 15px;
   font-size: 16px;
   cursor: pointer;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  border-bottom: 1px solid #8e262f;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s;
   
   &:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: #2a2a2a;
   }
   
   &:last-child {
     border-bottom: none;
   }
-`;
-
-const MobileDropdownIcon = styled.div`
-  margin-left: 10px;
-  transition: transform 0.3s ease;
-  transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0)'};
-  color: #fff;
-`;
-
-const MobileDropdownMenu = styled.div`
-  display: ${props => props.isOpen ? 'block' : 'none'};
-  background-color: rgba(0,0,0,0.2);
-  padding-left: 15px;
-  transition: all 0.3s ease;
-  max-height: ${props => props.isOpen ? '500px' : '0'};
-  overflow: hidden;
 `;
 
 const MobileMenuToggle = styled.div`
@@ -204,9 +188,8 @@ const MobileMenuContainer = styled.div`
   background-color: #1a1a1a;
   width: 100%;
   padding: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   z-index: 1000;
-  border-top: 1px solid rgba(255,255,255,0.1);
 `;
 
 const DesktopMenu = styled.div`
@@ -269,19 +252,25 @@ const MobileCategoryItem = styled(Link)`
   display: block;
   padding: 12px 15px 12px 30px;
   text-decoration: none;
-  color: #fff;
+  color: #e0e0e0;
   font-size: 15px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: all 0.3s ease;
+  background-color: #252525;
+  border-bottom: 1px solid #8e262f;
   
   &:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: #fff;
+    background-color: #353535;
+    color: #ffffff;
   }
   
   &:last-child {
     border-bottom: none;
   }
+`;
+
+// Mobile products dropdown container
+const MobileProductsDropdown = styled.div`
+  display: ${props => props.isOpen ? 'block' : 'none'};
+  width: 100%;
 `;
 
 const ContactButton = styled(Link)`
@@ -313,7 +302,8 @@ const Navbar = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const desktopMenuRef = useRef(null);
-  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
 
@@ -323,7 +313,7 @@ const Navbar = () => {
         setDesktopMenuOpen(false);
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsProductsDropdownOpen(false);
+        setIsProductsOpen(false);
       }
       // Close mobile menu when clicking outside
       if (mobileMenuRef.current && 
@@ -363,15 +353,14 @@ const Navbar = () => {
   };
 
   const toggleProductsDropdown = () => {
-    setIsProductsDropdownOpen(!isProductsDropdownOpen);
+    setIsProductsOpen(!isProductsOpen);
+  };
+
+  const toggleMobileProductsDropdown = () => {
+    setIsMobileProductsOpen(!isMobileProductsOpen);
   };
 
   const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const handleCategoryClick = () => {
-    setIsProductsDropdownOpen(false);
     setMobileMenuOpen(false);
   };
 
@@ -419,12 +408,12 @@ const Navbar = () => {
             <DesktopMenuItem onClick={toggleProductsDropdown}>
               PRODUCTS
             </DesktopMenuItem>
-            <DropdownContent isOpen={isProductsDropdownOpen}>
+            <DropdownContent isOpen={isProductsOpen}>
               {categories.map((category) => (
                 <DropdownItem 
                   key={category.id} 
                   to={`/products/${category.cat}`}
-                  onClick={() => setIsProductsDropdownOpen(false)}
+                  onClick={() => setIsProductsOpen(false)}
                 >
                   {category.title}
                 </DropdownItem>
@@ -493,21 +482,26 @@ const Navbar = () => {
         <Link to="/about" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
           <MobileMenuItem>About Us</MobileMenuItem>
         </Link>
-        <MobileMenuItem onClick={toggleProductsDropdown}>
-          Products
-          <MobileDropdownIcon isOpen={isProductsDropdownOpen}>›</MobileDropdownIcon>
+        
+        {/* Mobile Products dropdown toggle */}
+        <MobileMenuItem onClick={toggleMobileProductsDropdown}>
+          <span>Products</span>
+          {isMobileProductsOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </MobileMenuItem>
-        <MobileDropdownMenu isOpen={isProductsDropdownOpen}>
+        
+        {/* Mobile Products dropdown content */}
+        <MobileProductsDropdown isOpen={isMobileProductsOpen}>
           {categories.map((category) => (
             <MobileCategoryItem 
               key={category.id} 
               to={`/products/${category.cat}`}
-              onClick={handleCategoryClick}
+              onClick={closeMobileMenu}
             >
               {category.title}
             </MobileCategoryItem>
           ))}
-        </MobileDropdownMenu>
+        </MobileProductsDropdown>
+        
         <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
           <MobileMenuItem>Contact</MobileMenuItem>
         </Link>
