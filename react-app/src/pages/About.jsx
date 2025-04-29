@@ -4,6 +4,7 @@ import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Announcement from '../components/Announcement';
+import CTA from "../components/CallToAction";
 
 // Styled components
 const Container = styled.div`
@@ -356,7 +357,7 @@ const About = () => {
             <SectionContent ref={whoWeAreContentRef} isVisible={visibleElements.whoWeAreContent}>
               <TextContent>
                 <Paragraph>
-                  Marple Wood Products Ltd has carried out various interior fit out work for well renowned developers. Our experience in interior fit-outs enables us to carry out large-scale projects to the highest standards of quality within a given cost and time frame.
+                  Marple Wood Products has carried out various interior fit out work for well renowned developers. Our experience in interior fit-outs enables us to carry out large-scale projects to the highest standards of quality within a given cost and time frame.
                 </Paragraph>
                 <Paragraph>
                   From concept to completion, we combine the practical with the aesthetic, creating grace and opulence in all the work we do. We are defined by standardized quality and perfection to our craft.
@@ -478,6 +479,7 @@ const About = () => {
           </Section>
         </Wrapper>
       </ContentSection>
+      <CTA/>
       
       <Footer />
     </Container>

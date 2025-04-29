@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { publicRequest } from "../requestmethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
-import Subscription from '../components/Subscription';
+import Subscription from '../components/CallToAction';
 
 const Container = styled.div`
     background-color: #f9f9f9;
