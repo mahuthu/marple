@@ -112,7 +112,22 @@ const Title = styled.h1`
   font-size: 70px;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.5s;
   ${mobile({ fontSize: "28px" })}
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const Desc = styled.p`
@@ -122,7 +137,22 @@ const Desc = styled.p`
   letter-spacing: 3px;
   color: white;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1s;
   ${mobile({ fontSize: "14px", margin: "20px 0px" })}
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -134,6 +164,10 @@ const Button = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   width: fit-content;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 1.5s;
   
   &:hover {
     background-color: white;
@@ -141,28 +175,50 @@ const Button = styled.button`
   }
   
   ${mobile({ fontSize: "16px", padding: "5px" })}
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleClick = (direction) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    
     if (direction === "left") {
       setSlideIndex(slideIndex > 0 ? slideIndex - 1 : sliderItems.length - 1);
     } else {
       setSlideIndex(slideIndex < sliderItems.length - 1 ? slideIndex + 1 : 0);
     }
+
+    // Reset animation state after transition
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 2000);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlideIndex(prevIndex =>
-        prevIndex < sliderItems.length - 1 ? prevIndex + 1 : 0
-      );
-    }, 7000); // Change slide every 7 seconds
+      if (!isAnimating) {
+        setSlideIndex(prevIndex =>
+          prevIndex < sliderItems.length - 1 ? prevIndex + 1 : 0
+        );
+      }
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isAnimating]);
 
   return (
     <Container>
@@ -170,16 +226,16 @@ const Slider = () => {
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
+        {sliderItems.map((item, index) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <Image src={item.img} alt={item.title} />
               <GradientOverlay />
             </ImgContainer>
-            <InfoContainer>
+            <InfoContainer key={`${item.id}-${slideIndex}`}>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              {/* <Button>SHOP NOW</Button> */}
             </InfoContainer>
           </Slide>
         ))}

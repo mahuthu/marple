@@ -69,7 +69,7 @@ const Categories = () => {
 
     return (
       <Container>
-        <Title ref={titleRef} isVisible={titleVisible}>Our Products</Title>
+        {/* <Title ref={titleRef} isVisible={titleVisible}>Our Products</Title> */}
         {categories.map((item) => (
           <CategoryItem item={item} key={item.id} />
         ))}
