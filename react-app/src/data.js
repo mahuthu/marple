@@ -1,42 +1,49 @@
 export const sliderItems = [
   {
     id: 1,
+    img: "/images/acc6.avif",
+    title: "WELCOME TO MARPLE WOOD PRODUCTS ",
+    desc: "",
+    bg: "f5fafd",
+  },
+  {
+    id: 2,
     img: "/images/doors1.jpg",
     title: "PREMIUM DOORS",
     desc: "Discover our exquisite range of doors, from classic to contemporary designs. Perfect for any space.",
     bg: "f5fafd",
   },
   {
-    id: 2,
+    id: 3,
     img: "/images/floors4.jpeg",
     title: "ELEGANT FLOORING",
     desc: "Transform your space with our premium flooring solutions. Durable, stylish, and easy to maintain.",
     bg: "fcf1ed",
   },
   {
-    id: 3,
-    img: "/images/cabinets.jpg",
+    id: 4,
+    img: "/images/cabinets2.jpg",
     title: "CUSTOM CABINETS",
     desc: "Maximize your storage with our bespoke cabinet solutions. Perfect for kitchens and living spaces.",
     bg: "f5fafd",
   },
   {
-    id: 4,
-    img: "/images/wardrobe.jpg",
+    id: 5,
+    img: "/images/wardrobe5.jpg",
     title: "SMART WARDROBES",
     desc: "Organize your space with our modern wardrobe designs. Customizable to fit your needs.",
     bg: "fcf1ed",
   },
   {
-    id: 5,
-    img: "/images/interior4.webp",
+    id: 6,
+    img: "/images/acc2.jpg",
     title: "WOOD ACCESSORIES",
     desc: "Complete your space with our premium wood accessories. Quality components for every need.",
     bg: "f5fafd",
   },
   {
-    id: 6,
-    img: "/images/floors6.jpg",
+    id: 7,
+    img: "/images/acc12.jpg",
     title: "SPECIALTY PRODUCTS",
     desc: "Explore our range of specialty wood products. From wall treatments to decorative elements.",
     bg: "fcf1ed",
@@ -48,7 +55,7 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "images/doors1.jpg",
+    img: "images/door4.jpg",
     title: "Doors",
     cat: "doors",
     desc: "Premium quality doors crafted with precision. From classic to modern designs, find the perfect door for your space.",
@@ -84,7 +91,7 @@ export const categories = [
   },
   {
     id: 3,
-    img: "images/cabinets.jpg",
+    img: "images/cabinet4.jpg",
     title: "Cabinets",
     cat: "cabinets",
     desc: "Custom cabinets designed to maximize your storage space. Perfect for kitchens, bathrooms, and living areas.",
@@ -98,7 +105,7 @@ export const categories = [
   },
   {
     id: 4,
-    img: "images/wardrobe.jpg",
+    img: "images/wardrobe2.webp",
     title: "Wardrobes",
     cat: "wardrobes",
     desc: "Smart wardrobe solutions with modern designs. Organize your space with style and efficiency.",
@@ -111,7 +118,7 @@ export const categories = [
   },
   {
     id: 5,
-    img: "images/interior4.webp",
+    img: "images/acc1.jpg",
     title: "Wood Accessories",
     cat: "accessories",
     desc: "Essential wood accessories to complete your space. Quality components for doors and other wood products.",
@@ -125,7 +132,7 @@ export const categories = [
   },
   {
     id: 6,
-    img: "images/floors6.jpg",
+    img: "images/acc5.jpg",
     title: "Others",
     cat: "others",
     desc: "Discover our range of custom furniture and interior solutions tailored to your needs.",

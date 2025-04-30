@@ -168,7 +168,7 @@ const WhyChooseUs = () => {
           isVisible={visibleItems["feature-1"]}
         >
           <ImageContainer>
-            <Image src="/images/interior1.webp" alt="Quality Interior Design" />
+            <Image src="/images/acc3.jpg" alt="Quality Interior Design" />
           </ImageContainer>
           <TextContainer>
             <FeatureTitle>Expert Craftsmanship</FeatureTitle>
@@ -193,7 +193,7 @@ const WhyChooseUs = () => {
           isVisible={visibleItems["feature-2"]}
         >
           <ImageContainer>
-            <Image src="/images/cabinets2.jpg" alt="Innovative Solutions" />
+            <Image src="/images/acc11.jpg" alt="Innovative Solutions" />
           </ImageContainer>
           <TextContainer>
             <FeatureTitle>Innovative Design Solutions</FeatureTitle>

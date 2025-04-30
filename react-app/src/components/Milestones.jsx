@@ -4,7 +4,7 @@ import { mobile } from '../responsive';
 
 const Container = styled.div`
   padding: 80px 0;
-  background-image: url('/images/interior4.webp');
+  background-image: url('/images/acc2.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

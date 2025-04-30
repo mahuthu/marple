@@ -65,6 +65,18 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transform: scale(1.1);
+  transition: transform 8s ease-in-out;
+  animation: zoomOut 8s ease-in-out infinite alternate;
+
+  @keyframes zoomOut {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 
 const GradientOverlay = styled.div`
@@ -147,9 +159,9 @@ const Slider = () => {
       setSlideIndex(prevIndex =>
         prevIndex < sliderItems.length - 1 ? prevIndex + 1 : 0
       );
-    }, 5000); // Change slide every 5 seconds
+    }, 7000); // Change slide every 7 seconds
 
-    return () => clearInterval(interval); // Clean up interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
