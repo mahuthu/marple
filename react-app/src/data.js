@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "/images/acc6.avif",
+    img: "/images/bac8.jpg",
     title: "WELCOME TO MARPLE WOOD PRODUCTS ",
     desc: "",
     bg: "f5fafd",

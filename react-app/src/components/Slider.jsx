@@ -100,11 +100,13 @@ const InfoContainer = styled.div`
   position: relative;
   z-index: 2;
   padding: 50px;
-  width: 40%;
+  width: ${props => props.isFirstSlide ? '100%' : '40%'};
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: ${props => props.isFirstSlide ? 'center' : 'flex-start'};
   height: 100%;
+  text-align: ${props => props.isFirstSlide ? 'center' : 'left'};
   ${mobile({ width: "100%", padding: "20px" })}
 `;
 
@@ -116,6 +118,7 @@ const Title = styled.h1`
   transform: translateY(20px);
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.5s;
+  text-align: ${props => props.isFirstSlide ? 'center' : 'left'};
   ${mobile({ fontSize: "28px" })}
 
   @keyframes fadeInUp {
@@ -141,6 +144,7 @@ const Desc = styled.p`
   transform: translateY(20px);
   animation: fadeInUp 1s ease forwards;
   animation-delay: 1s;
+  text-align: ${props => props.isFirstSlide ? 'center' : 'left'};
   ${mobile({ fontSize: "14px", margin: "20px 0px" })}
 
   @keyframes fadeInUp {
@@ -168,6 +172,7 @@ const Button = styled.button`
   transform: translateY(20px);
   animation: fadeInUp 1s ease forwards;
   animation-delay: 1.5s;
+  margin: ${props => props.isFirstSlide ? '0 auto' : '0'};
   
   &:hover {
     background-color: white;
@@ -232,10 +237,10 @@ const Slider = () => {
               <Image src={item.img} alt={item.title} />
               <GradientOverlay />
             </ImgContainer>
-            <InfoContainer key={`${item.id}-${slideIndex}`}>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              {/* <Button>SHOP NOW</Button> */}
+            <InfoContainer key={`${item.id}-${slideIndex}`} isFirstSlide={item.id === 1}>
+              <Title isFirstSlide={item.id === 1}>{item.title}</Title>
+              <Desc isFirstSlide={item.id === 1}>{item.desc}</Desc>
+              {/* <Button isFirstSlide={item.id === 1}>SHOW NOW</Button> */}
             </InfoContainer>
           </Slide>
         ))}
