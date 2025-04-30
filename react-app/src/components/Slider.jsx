@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${mobile({ height: "60vh" })}
+  ${mobile({ height: "100vh" })}
 `;
 
 const Arrow = styled.div`
