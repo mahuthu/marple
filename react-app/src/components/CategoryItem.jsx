@@ -70,6 +70,9 @@ const Title = styled.h1`
   font-weight: 600;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   
   ${mobile({
     fontSize: "1.2rem",
@@ -84,6 +87,9 @@ const Description = styled.p`
   max-width: 85%;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   ${mobile({
     fontSize: "0.9rem",
@@ -104,6 +110,9 @@ const Button = styled.button`
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.8px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   
   &:hover {
     background-color: white;

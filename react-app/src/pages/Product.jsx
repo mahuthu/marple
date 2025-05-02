@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 // import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-import Announcement from '../components/Announcement';
+// import Announcement from '../components/Announcement';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../responsive';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -63,6 +63,9 @@ const Title = styled.h1`
     margin-bottom: 15px;
     position: relative;
     padding-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 
     &::after {
         content: '';
@@ -82,6 +85,9 @@ const Desc = styled.p`
     font-size: 1rem;
     line-height: 1.5;
     color: #666;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.3px;
     ${mobile({ fontSize: "0.95rem" })}
 `;
 
@@ -89,6 +95,9 @@ const Price = styled.span`
     font-weight: 600;
     font-size: 1.8rem;
     color: #8e262f;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
     ${mobile({ fontSize: "1.4rem" })}
 `;
 
@@ -125,6 +134,9 @@ const FilterTitle = styled.span`
     font-weight: 500;
     color: #333;
     min-width: 60px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 `;
 
 const FilterColor = styled.div`
@@ -270,6 +282,17 @@ const Button = styled.button`
     })}
 `;
 
+const WhatsAppButton = styled(Button)`
+    background-color: #25D366;
+    border-color: #25D366;
+    margin-top: 10px;
+    
+    &:hover {
+        background-color: white;
+        color: #25D366;
+    }
+`;
+
 const CountInStock = styled.p`
     margin-top: 8px;
     font-size: 0.9rem;
@@ -278,6 +301,9 @@ const CountInStock = styled.p`
     display: flex;
     align-items: center;
     gap: 6px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.3px;
 
     &::before {
         content: '';
@@ -332,9 +358,21 @@ const Product = () => {
         }
     };
 
+    const handleWhatsAppCheckout = () => {
+        const message = `I would like to purchase:
+Product: ${product.title}
+Quantity: ${quantity}
+Price: KSH${product.price * quantity}
+Total: KSH${product.price * quantity}
+Image: ${product.imageUrl}`;
+        
+        const whatsappUrl = `https://wa.me/254795683399?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
     return (
         <Container>
-            <Announcement/>
+            {/* <Announcement/> */}
             <Navbar />
             <Wrapper>
                 <ImgContainer>
@@ -348,7 +386,7 @@ const Product = () => {
                         {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                     </CountInStock>
                     <FilterContainer>
-                        <Filter>
+                        {/* <Filter>
                             <FilterTitle>Color</FilterTitle>
                             {Array.isArray(product.color) && product.color.map((c) => (
                                 <FilterColor color={c} key={c} onClick={() => setColor(c)} />
@@ -362,7 +400,7 @@ const Product = () => {
                                     <option key={s} value={s}>{s}</option>
                                 ))}
                             </FilterSize>
-                        </Filter>
+                        </Filter> */}
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>
@@ -373,6 +411,9 @@ const Product = () => {
                         <Button onClick={handleClick} disabled={product.countInStock === 0}>
                             {product.countInStock === 0 ? "OUT OF STOCK" : "ADD TO CART"}
                         </Button>
+                        <WhatsAppButton onClick={handleWhatsAppCheckout} disabled={product.countInStock === 0}>
+                            Checkout via WhatsApp
+                        </WhatsAppButton>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>

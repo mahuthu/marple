@@ -23,6 +23,20 @@ const Container = styled.div`
   }
 `;
 
+const Title = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  
+  ${mobile({ fontSize: "1.8rem", marginBottom: "40px" })}
+`;
+
 const Wrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -40,6 +54,20 @@ const MilestoneItem = styled.div`
   flex: 1;
   padding: 0 20px;
   transition: transform 0.3s ease;
+  position: relative;
+  
+  /* Desktop vertical separator */
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 50%;
+    background-color: white;
+    opacity: 0.5;
+  }
   
   &:hover {
     transform: translateY(-10px);
@@ -48,6 +76,7 @@ const MilestoneItem = styled.div`
   ${mobile({ 
     marginBottom: "40px",
     position: "relative",
+    width: "100%",
     "&:not(:last-child)::after": {
       content: '""',
       position: "absolute",
@@ -57,7 +86,9 @@ const MilestoneItem = styled.div`
       width: "50%",
       height: "1px",
       backgroundColor: "white",
-      opacity: "0.5"
+      opacity: "0.5",
+      top: "auto",
+      right: "auto"
     }
   })}
 `;
@@ -164,6 +195,7 @@ const Milestones = () => {
 
   return (
     <Container ref={containerRef}>
+      <Title>Milestones We Have Proudly Accomplished</Title>
       <Wrapper>
         {milestones.map((milestone, index) => (
           <MilestoneItem key={milestone.id}>

@@ -12,6 +12,9 @@ const Title = styled.h2`
   margin-bottom: 50px;
   font-size: 36px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -56,6 +59,18 @@ const ProjectImage = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+              0 6px 6px rgba(0, 0, 0, 0.05),
+              0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+                0 10px 10px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const ProjectInfo = styled.div`
@@ -71,16 +86,25 @@ const ProjectInfo = styled.div`
 const ProjectTitle = styled.h3`
   font-size: 20px;
   margin-bottom: 5px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const ProjectClient = styled.p`
   font-size: 14px;
   margin-bottom: 5px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const ProjectLocation = styled.p`
   font-size: 14px;
   opacity: 0.8;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const ProjectsGallery = () => {

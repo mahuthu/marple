@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Announcement from '../components/Announcement';
+// import Announcement from '../components/Announcement';
 import CTA from "../components/CallToAction";
 
 // Styled components
@@ -30,6 +30,8 @@ const HeroTitle = styled.h1`
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -41,6 +43,9 @@ const HeroSubtitle = styled.p`
   font-size: 20px;
   max-width: 800px;
   margin: 0 auto;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -70,6 +75,9 @@ const SectionTitle = styled.h2`
   margin-bottom: 30px;
   text-align: center;
   position: relative;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -109,6 +117,9 @@ const Paragraph = styled.p`
   line-height: 1.8;
   color: #555;
   margin-bottom: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const ImageContent = styled.div`
@@ -125,10 +136,17 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+              0 6px 6px rgba(0, 0, 0, 0.05),
+              0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+                0 10px 10px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -163,6 +181,9 @@ const CardTitle = styled.h3`
   color: #333;
   position: relative;
   padding-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   
   &:after {
     content: '';
@@ -179,6 +200,9 @@ const CardText = styled.p`
   font-size: 16px;
   line-height: 1.8;
   color: #555;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const CoreValuesContainer = styled.div`
@@ -229,12 +253,18 @@ const ValueTitle = styled.h3`
   font-size: 20px;
   margin-bottom: 15px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const ValueText = styled.p`
   font-size: 14px;
   line-height: 1.6;
   color: #666;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const About = () => {
@@ -341,7 +371,7 @@ const About = () => {
 
   return (
     <Container>
-      <Announcement/>
+      {/* <Announcement/> */}
       <Navbar />
       <HeroSection>
         <div>

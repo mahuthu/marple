@@ -9,21 +9,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { categories } from '../data';
 
 const Container = styled.div`
-  height: 100px;
+  height: 120px;
   position: relative;
-  ${mobile({ height: 'auto', minHeight: '80px' })}
+  padding: 10px 0;
+  ${mobile({ height: 'auto', minHeight: '100px', padding: '5px 0' })}
 `;
 
 const Wrapper = styled.div`
-  padding: 5px 30px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  height: 100%;
   ${mobile({ 
-    padding: '10px 15px',
+    padding: '0 15px',
     flexWrap: 'nowrap',
-    minHeight: '80px'
+    minHeight: '90px'
   })}
 `;
 
@@ -31,6 +33,7 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   ${mobile({
     justifyContent: 'flex-start',
     flex: '1'
@@ -38,7 +41,10 @@ const Left = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  margin-left: 10px;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
   ${mobile({ 
     marginLeft: '0',
     display: 'flex',
@@ -53,12 +59,12 @@ const Logo = styled.div`
 `;
 
 const LogoImage = styled.img`
-  height: 90px;
+  height: 100px;
   max-width: 100%;
   object-fit: contain;
-  ${mobile({ height: '75px' })}
+  ${mobile({ height: '100px' })}
   @media only screen and (max-width: 380px) {
-    height: 70px;
+    height: 100px;
   }
 `;
 
@@ -74,17 +80,17 @@ const Center = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
+  border: 0.5px solid lightgrey;
   display: flex;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
   border-radius: 4px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   ${mobile({ 
     margin: '0 10px',
-    maxWidth: '100%'
+    maxWidth: '55%'
   })}
   @media only screen and (max-width: 380px) {
     margin: 0 5px;
@@ -97,6 +103,9 @@ const Input = styled.input`
   width: 100%;
   padding: 5px;
   font-size: 14px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   ${mobile({ 
     width: '100%',
     fontSize: '13px',
@@ -125,6 +134,40 @@ const MenuItem = styled.div`
 
 const DesktopMenuItem = styled(MenuItem)`
   ${mobile({ display: 'none' })}
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    color: #8e262f;
+    transform: translateY(-2px);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #8e262f;
+      transform: scaleX(1);
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #8e262f;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
 `;
 
 const MobileCartItem = styled(MenuItem)`
@@ -146,6 +189,9 @@ const MobileMenuItem = styled.div`
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.3s;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   
   &:hover {
     background-color: #2a2a2a;
@@ -240,10 +286,30 @@ const DropdownItem = styled(Link)`
   color: #333;
   font-size: 14px;
   transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   &:hover {
     background-color: #f5f5f5;
     color: #8e262f;
+    transform: translateX(5px);
+    
+    &::before {
+      content: '→';
+      position: absolute;
+      left: 5px;
+      opacity: 1;
+    }
+  }
+  
+  &::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
   }
 `;
 
@@ -256,6 +322,9 @@ const MobileCategoryItem = styled(Link)`
   font-size: 15px;
   background-color: #252525;
   border-bottom: 1px solid #8e262f;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   &:hover {
     background-color: #353535;
@@ -283,12 +352,38 @@ const ContactButton = styled(Link)`
   font-weight: 500;
   transition: all 0.3s ease;
   margin-left: 25px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   
   &:hover {
     background-color: #6d1d24;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+    
+    &:hover::after {
+      left: 100%;
+    }
   }
-
+  
   ${mobile({ display: 'none' })}
 `;
 

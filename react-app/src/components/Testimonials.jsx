@@ -13,6 +13,9 @@ const Title = styled.h2`
   margin-bottom: 50px;
   font-size: 36px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 `;
 
 const TestimonialWrapper = styled.div`
@@ -48,6 +51,9 @@ const Quote = styled.p`
   color: #555;
   margin-bottom: 20px;
   font-style: italic;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   ${mobile({
     fontSize: "16px",
@@ -65,6 +71,17 @@ const AuthorImage = styled.img`
   border-radius: 50%;
   margin-right: 15px;
   object-fit: cover;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1),
+              0 3px 3px rgba(0, 0, 0, 0.05),
+              0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
+                0 5px 5px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const AuthorInfo = styled.div``;
@@ -73,11 +90,17 @@ const AuthorName = styled.h4`
   font-size: 18px;
   margin-bottom: 5px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const AuthorTitle = styled.p`
   font-size: 14px;
   color: #777;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const Dots = styled.div`

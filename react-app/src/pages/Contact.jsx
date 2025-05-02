@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import Navbar from '../components/Navbar';
-import Announcement1 from '../components/Announcement';
+// import Announcement1 from '../components/Announcement';
 import Footer from '../components/Footer';
 import { 
   LocationOn, 
@@ -38,6 +38,9 @@ const HeroTitle = styled.h1`
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(30px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   ${mobile({ fontSize: "36px" })}
 `;
 
@@ -71,6 +74,9 @@ const Title = styled.h2`
   margin-bottom: 30px;
   color: #333;
   position: relative;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   
   &:after {
     content: '';
@@ -88,6 +94,9 @@ const Subtitle = styled.p`
   color: #666;
   margin-bottom: 40px;
   line-height: 1.6;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const InfoItem = styled.div`
@@ -119,11 +128,17 @@ const InfoTitle = styled.h3`
   font-size: 18px;
   color: #333;
   margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const InfoText = styled.p`
   color: #666;
   line-height: 1.6;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const SocialLinks = styled.div`
@@ -138,6 +153,9 @@ const SocialTitle = styled.h3`
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const SocialIcons = styled.div`
@@ -187,6 +205,9 @@ const FormTitle = styled.h2`
   margin-bottom: 30px;
   color: #333;
   text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 `;
 
 const InputGroup = styled.div`
@@ -202,6 +223,9 @@ const Label = styled.label`
   font-size: 14px;
   color: #666;
   margin-bottom: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const Input = styled.input`
@@ -209,6 +233,9 @@ const Input = styled.input`
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   &:focus {
     outline: none;
@@ -235,6 +262,9 @@ const TextArea = styled.textarea`
   font-size: 16px;
   min-height: 150px;
   resize: vertical;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   
   &:focus {
     outline: none;
@@ -390,7 +420,7 @@ const Contact = () => {
 
   return (
     <Container>
-      <Announcement1/>
+      {/* <Announcement1/> */}
 
       <Navbar />
       

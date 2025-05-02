@@ -42,6 +42,9 @@ const Title = styled.h2`
   padding-bottom: 15px;
   font-weight: 600;
   letter-spacing: 1px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -67,6 +70,9 @@ const Description = styled.p`
   margin-bottom: 35px;
   line-height: 1.8;
   font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -85,6 +91,9 @@ const ContactButton = styled(Link)`
   text-decoration: none;
   transition: all 0.3s ease;
   margin-bottom: 35px;
+  letter-spacing: 0.5px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
   letter-spacing: 0.5px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};

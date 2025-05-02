@@ -11,7 +11,7 @@ import { updateProductQuantity, clearCart } from '../redux/cartRedux';
 
 // Components
 import Navbar from '../components/Navbar';
-import Announcement from '../components/Announcement';
+// import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 
 // Styled Components
@@ -357,7 +357,7 @@ const Cart = () => {
   return (
     <PageContainer>
       <Navbar />
-      <Announcement />
+      
       
       <MainContent>
         <PageTitle>Your Shopping Cart</PageTitle>
@@ -391,9 +391,9 @@ const Cart = () => {
                   <ProductDetails>
                     <ProductTitle>{product.title}</ProductTitle>
                     <ProductInfo>
-                      <span>ID: {product._id}</span>
-                      <span>Size: {product.size}</span>
-                      <ColorContainer>
+                      {/* <span>ID: {product._id}</span> */}
+                      {/* <span>Size: {product.size}</span> */}
+                      {/* <ColorContainer>
                         {product.color ? (
                           <ColorCircle color={product.color} />
                         ) : (
@@ -401,7 +401,7 @@ const Cart = () => {
                             <ColorCircle key={index} color={color} />
                           ))
                         )}
-                      </ColorContainer>
+                      </ColorContainer> */}
                     </ProductInfo>
                     
                     <QuantityControls>

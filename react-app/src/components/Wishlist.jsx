@@ -19,6 +19,9 @@ const Title = styled.h2`
   font-weight: 300;
   text-align: center;
   margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 
   @media (max-width: 768px) {
     font-size: 24px;
@@ -73,6 +76,9 @@ const ItemInfo = styled.div`
 const ItemTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -91,6 +97,9 @@ const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 
   &:hover {
     opacity: 0.8;
@@ -103,7 +112,7 @@ const Button = styled.button`
 `;
 
 const ViewButton = styled(Button)`
-  background-color: teal;
+  background-color: #8e263f;
   color: white;
 `;
 
@@ -131,6 +140,9 @@ const EmptyWishlist = styled.div`
   padding: 40px;
   font-size: 18px;
   color: #666;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 
   @media (max-width: 768px) {
     padding: 30px;
@@ -157,7 +169,7 @@ const Wishlist = () => {
 
   return (
     <Container>
-      <Title>My Wishlist <Favorite style={{ color: '#e91e63', verticalAlign: 'middle' }} /></Title>
+      <Title>My Wishlist <Favorite style={{ color: '#8e262f', verticalAlign: 'middle' }} /></Title>
       {wishlist.length > 0 ? (
         <WishlistContainer>
           {wishlist.map(item => (

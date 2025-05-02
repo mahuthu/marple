@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+// import Announcement from "../components/Announcement";
 import Products from "../components/Products";
 // import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
@@ -46,6 +46,9 @@ const Title = styled.h1`
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateX(0)' : 'translateX(-50px)'};
   transition: opacity 0.8s ease, transform 0.8s ease;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 
   &::after {
     content: '';
@@ -77,6 +80,9 @@ const Description = styled.p`
   color: #666;
   margin-bottom: 30px;
   text-align: justify;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const Subcategories = styled.div`
@@ -88,6 +94,9 @@ const SubcategoryTitle = styled.h3`
   color: #333;
   margin-bottom: 15px;
   text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const SubcategoryList = styled.ul`
@@ -107,6 +116,9 @@ const SubcategoryItem = styled.li`
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition-delay: ${props => `${0.1 + props.index * 0.05}s`};
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 
   &:hover {
     transform: translateY(-5px);
@@ -139,16 +151,26 @@ const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   ${mobile({ marginRight: "0px" })}
 `;
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   ${mobile({ margin: "10px 0px" })}
 `;
 
-const Option = styled.option``;
+const Option = styled.option`
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+`;
 
 const ProductList = () => {
   const location = useLocation();
@@ -221,7 +243,7 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Announcement/>
+      {/* <Announcement/> */}
       <Navbar />
       <HeroSection>
         <BackgroundImage image={currentCategory?.img} />
@@ -252,7 +274,7 @@ const ProductList = () => {
       )}
 
       <FilterContainer ref={filterContainerRef} isVisible={visibleElements.filterContainer}>
-        <Filter>
+        {/* <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>
             <Option disabled>Color</Option>
@@ -273,11 +295,11 @@ const ProductList = () => {
             <Option>L</Option>
             <Option>XL</Option>
           </Select>
-        </Filter>
+        </Filter> */}
         <Filter>
           <FilterText>Sort Products:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="newest">Newest</Option>
+            {/* <Option value="newest">Newest</Option> */}
             <Option value="asc">Price (asc)</Option>
             <Option value="desc">Price (desc)</Option>
           </Select>

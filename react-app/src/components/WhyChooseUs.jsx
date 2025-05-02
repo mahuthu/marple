@@ -19,6 +19,9 @@ const Title = styled.h2`
   margin-bottom: 50px;
   color: #333;
   position: relative;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   opacity: ${props => props.isVisible ? 1 : 0};
   transform: ${props => props.isVisible ? 'translateY(0)' : 'translateY(20px)'};
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -63,7 +66,17 @@ const Image = styled.img`
   width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+              0 6px 6px rgba(0, 0, 0, 0.05),
+              0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+                0 10px 10px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const TextContainer = styled.div`
@@ -77,6 +90,9 @@ const FeatureTitle = styled.h3`
   font-size: 24px;
   margin-bottom: 15px;
   color: #333;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 `;
 
 const FeatureText = styled.p`
@@ -84,6 +100,9 @@ const FeatureText = styled.p`
   line-height: 1.6;
   color: #666;
   margin-bottom: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 `;
 
 const FeatureList = styled.ul`
@@ -95,6 +114,9 @@ const FeatureItem = styled.li`
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.3px;
   
   &:before {
     content: '✓';

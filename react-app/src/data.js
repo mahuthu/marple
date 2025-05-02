@@ -59,7 +59,7 @@ export const categories = [
     title: "Doors",
     cat: "doors",
     desc: "Premium quality doors crafted with precision. From classic to modern designs, find the perfect door for your space.",
-    detailedDesc: "Doors are more than just a style here at Wood Products Kenya Ltd. We have an extensive selection of interior and exterior doors. If it is for a specific size, we can tailor make it for you according to your needs. We have just about every type of interior and exterior door you can want. All our products are dedicated to the highest level of design and quality. Materials, size, color, style are all things to consider when determining what door is perfect for you.",
+    detailedDesc: "Doors are more than just a style here at Marple Wood Products Kenya. We have an extensive selection of interior and exterior doors. If it is for a specific size, we can tailor make it for you according to your needs. We have just about every type of interior and exterior door you can want. All our products are dedicated to the highest level of design and quality. Materials, size, color, style are all things to consider when determining what door is perfect for you.",
     subcategories: [
       "Solid timber panel doors",
       "Semi-solid & Flush doors",

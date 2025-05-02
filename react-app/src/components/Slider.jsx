@@ -119,6 +119,9 @@ const Title = styled.h1`
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.5s;
   text-align: ${props => props.isFirstSlide ? 'center' : 'left'};
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
   ${mobile({ fontSize: "28px" })}
 
   @keyframes fadeInUp {
@@ -145,6 +148,9 @@ const Desc = styled.p`
   animation: fadeInUp 1s ease forwards;
   animation-delay: 1s;
   text-align: ${props => props.isFirstSlide ? 'center' : 'left'};
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
   ${mobile({ fontSize: "14px", margin: "20px 0px" })}
 
   @keyframes fadeInUp {
@@ -173,6 +179,9 @@ const Button = styled.button`
   animation: fadeInUp 1s ease forwards;
   animation-delay: 1.5s;
   margin: ${props => props.isFirstSlide ? '0 auto' : '0'};
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   
   &:hover {
     background-color: white;
