@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
-import { Facebook, Instagram, Twitter, LinkedIn, WhatsApp } from '@mui/icons-material';
+import { Facebook, Instagram, Twitter, WhatsApp } from '@mui/icons-material';
+
+// Import TikTok icon (since it's not available in Material UI)
+const TikTokIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
 
 const Container = styled.div`
   background-color: #1a1a1a;
@@ -136,19 +143,19 @@ const Footer = () => {
             dedicated ourselves creating products that cater for various developments.
           </ContactText>
           <SocialIcons>
-            <SocialIcon href="https://facebook.com" target="_blank">
+            <SocialIcon href="https://facebook.com/Maple_Wood_Products" target="_blank">
               <Facebook />
             </SocialIcon>
-            <SocialIcon href="https://instagram.com" target="_blank">
+            <SocialIcon href="https://instagram.com/Maple_Wood_Products" target="_blank">
               <Instagram />
             </SocialIcon>
-            <SocialIcon href="https://twitter.com" target="_blank">
+            <SocialIcon href="https://twitter.com/Maple_Wood_Products" target="_blank">
               <Twitter />
             </SocialIcon>
-            <SocialIcon href="https://linkedin.com" target="_blank">
-              <LinkedIn />
+            <SocialIcon href="https://tiktok.com/@Maple_Wood_Products" target="_blank">
+              <TikTokIcon />
             </SocialIcon>
-            <SocialIcon href="https://wa.me/254721917816" target="_blank">
+            <SocialIcon href="https://wa.me/254795683399" target="_blank">
               <WhatsApp />
             </SocialIcon>
           </SocialIcons>

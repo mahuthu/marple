@@ -11,16 +11,11 @@ import Wishlist from './pages/WishList';
 import SearchResults from './pages/searchpage';
 import AboutUs from './pages/About'
 import Contact from './pages/Contact'
-
-
-
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import Navbar from './components/Navbar';
+// import Footer from './components/Footer';
+import FloatingSocialIcons from './components/FloatingSocialIcons';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -34,6 +29,7 @@ const App = () => {
 
   return (
     <Router>
+      <FloatingSocialIcons />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
@@ -50,6 +46,7 @@ const App = () => {
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
         
       </Routes>
+      {/* <Footer /> */}
     </Router>
   );
 };

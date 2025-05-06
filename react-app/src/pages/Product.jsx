@@ -364,7 +364,7 @@ Product: ${product.title}
 Quantity: ${quantity}
 Price: KSH${product.price * quantity}
 Total: KSH${product.price * quantity}
-Image: ${product.imageUrl}`;
+// Image: ${product.imageUrl}`;
         
         const whatsappUrl = `https://wa.me/254795683399?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
