@@ -11,10 +11,10 @@ const TikTokIcon = () => (
   </svg>
 );
 
-// Main container with adjusted position
+// Main container with significantly adjusted position
 const Container = styled.div`
   position: fixed;
-  right: 20px; /* Move further from the right edge */
+  right: 35px; /* Moved much further from the right edge */
   bottom: 50px;
   display: flex;
   flex-direction: column;
@@ -23,11 +23,11 @@ const Container = styled.div`
   padding: 10px;
   
   /* Ensure container stays within viewport */
-  max-width: calc(100vw - 40px); /* Adjust based on right position */
+  max-width: calc(100vw - 70px); /* Adjust based on right position plus padding */
   box-sizing: border-box;
   
   ${mobile({
-    right: '15px', /* Still keep some distance on mobile */
+    right: '25px', /* Further from edge on mobile as well */
     bottom: '30px',
     padding: '5px',
     gap: '5px',
@@ -35,7 +35,7 @@ const Container = styled.div`
   
   /* Extra direct media query for safety */
   @media screen and (max-width: 480px) {
-    right: 15px;
+    right: 25px;
   }
 `;
 
@@ -69,7 +69,7 @@ const IconWrapper = styled.a`
   })}
 `;
 
-// Toggle button with fixed positioning - no negative margins
+// Toggle button with fixed positioning
 const ToggleButton = styled.button`
   width: 35px;
   height: 35px;
@@ -87,8 +87,7 @@ const ToggleButton = styled.button`
   
   ${mobile({
     display: 'flex',
-    position: 'static', /* Don't use relative positioning */
-    marginLeft: '0'     /* Remove negative margin */
+    position: 'static'
   })}
   
   /* Extra direct media query for safety */
