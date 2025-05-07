@@ -11,9 +11,10 @@ const TikTokIcon = () => (
   </svg>
 );
 
+// Main container with adjusted position
 const Container = styled.div`
   position: fixed;
-  right: 0;
+  right: 20px; /* Move further from the right edge */
   bottom: 50px;
   display: flex;
   flex-direction: column;
@@ -21,16 +22,21 @@ const Container = styled.div`
   z-index: 1000;
   padding: 10px;
   
-  /* Ensure container stays within viewport on all devices */
-  max-width: 100vw;
+  /* Ensure container stays within viewport */
+  max-width: calc(100vw - 40px); /* Adjust based on right position */
   box-sizing: border-box;
   
   ${mobile({
-    right: '0',
+    right: '15px', /* Still keep some distance on mobile */
     bottom: '30px',
     padding: '5px',
     gap: '5px',
   })}
+  
+  /* Extra direct media query for safety */
+  @media screen and (max-width: 480px) {
+    right: 15px;
+  }
 `;
 
 const IconWrapper = styled.a`
@@ -56,14 +62,15 @@ const IconWrapper = styled.a`
     width: '35px',
     height: '35px',
     '& svg': {
-      fontSize: '1.1rem'
+      fontSize: '1.1rem',
+      width: '20px',
+      height: '20px'
     }
   })}
 `;
 
-// Optional collapsible functionality for mobile
+// Toggle button with fixed positioning - no negative margins
 const ToggleButton = styled.button`
-  display: none;
   width: 35px;
   height: 35px;
   border-radius: 4px;
@@ -72,47 +79,62 @@ const ToggleButton = styled.button`
   border: none;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  display: none;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
   
   ${mobile({
     display: 'flex',
+    position: 'static', /* Don't use relative positioning */
+    marginLeft: '0'     /* Remove negative margin */
+  })}
+  
+  /* Extra direct media query for safety */
+  @media screen and (max-width: 480px) {
+    display: flex;
+  }
+`;
+
+const IconsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+  ${mobile({
+    gap: '5px'
   })}
 `;
 
 const FloatingSocialIcons = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 0
-  );
+  const [isMobile, setIsMobile] = useState(false);
 
   // Track screen width for responsive adjustments
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Initialize on mount
     if (typeof window !== 'undefined') {
-      const handleResize = () => {
-        setScreenWidth(window.innerWidth);
-      };
-      
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
+      checkMobile();
+      setIsCollapsed(window.innerWidth <= 768);
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
     }
   }, []);
 
-  // Auto-collapse on small screens
+  // Update collapsed state when mobile state changes
   useEffect(() => {
-    // Adjust this breakpoint based on your mobile breakpoint
-    const mobileBreakpoint = 768;
-    if (screenWidth <= mobileBreakpoint) {
-      setIsCollapsed(true);
-    } else {
-      setIsCollapsed(false);
-    }
-  }, [screenWidth]);
+    setIsCollapsed(isMobile);
+  }, [isMobile]);
 
   return (
     <Container>
       {!isCollapsed && (
-        <>
+        <IconsContainer>
           <IconWrapper
             href="https://wa.me/254795683399"
             target="_blank"
@@ -137,9 +159,9 @@ const FloatingSocialIcons = () => {
           >
             <TikTokIcon />
           </IconWrapper>
-        </>
+        </IconsContainer>
       )}
-      <ToggleButton 
+      <ToggleButton
         onClick={() => setIsCollapsed(!isCollapsed)}
         aria-label={isCollapsed ? "Show social media icons" : "Hide social media icons"}
       >
