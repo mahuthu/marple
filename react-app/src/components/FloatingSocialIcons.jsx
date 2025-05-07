@@ -23,7 +23,9 @@ const Container = styled.div`
   ${mobile({
     right: '10px',
     bottom: '10px',
-    gap: '10px'
+    gap: '8px',
+    transform: 'scale(0.85)',
+    transformOrigin: 'bottom right'
   })}
 `;
 
@@ -47,8 +49,11 @@ const IconWrapper = styled.a`
   }
   
   ${mobile({
-    width: '45px',
-    height: '45px'
+    width: '40px',
+    height: '40px',
+    '& svg': {
+      fontSize: '1.2rem'
+    }
   })}
 `;
 
