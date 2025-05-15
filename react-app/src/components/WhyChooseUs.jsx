@@ -195,7 +195,7 @@ const WhyChooseUs = () => {
           <TextContainer>
             <FeatureTitle>Expert Craftsmanship</FeatureTitle>
             <FeatureText>
-              At Marple Wood Products, we pride ourselves on delivering exceptional quality in every project. 
+              At Maple Wood Products, we pride ourselves on delivering exceptional quality in every project. 
               Our team of skilled craftsmen brings years of experience and attention to detail to 
               ensure your space is transformed into something extraordinary.
             </FeatureText>

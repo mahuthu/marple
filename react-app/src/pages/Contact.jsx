@@ -481,7 +481,7 @@ const Contact = () => {
               </IconWrapper>
               <InfoContent>
                 <InfoTitle>Email</InfoTitle>
-                <InfoText>info@marplewoodproducts.co.ke</InfoText>
+                <InfoText>info@maplewoodproducts.co.ke</InfoText>
                 {/* <InfoText>customercare@woodproductskenya.co.ke</InfoText> */}
               </InfoContent>
             </InfoItem>
@@ -646,7 +646,7 @@ const Contact = () => {
             style={{ border: 0 }} 
             allowFullScreen="" 
             loading="lazy"
-            title="Marple Wood Products Location Map"
+            title="Maple Wood Products Location Map"
             referrerPolicy="no-referrer-when-downgrade"
           />
         </MapSection>

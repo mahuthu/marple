@@ -219,7 +219,7 @@ const CallToAction = () => {
           >
             <WhatsAppIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon 
+          {/* <SocialIcon 
             ref={el => iconRefs.current[1] = el} 
             isVisible={visibleElements['icon-1']} 
             index={1}
@@ -228,7 +228,7 @@ const CallToAction = () => {
             rel="noopener noreferrer"
           >
             <FacebookIcon fontSize="medium" />
-          </SocialIcon>
+          </SocialIcon> */}
           <SocialIcon 
             ref={el => iconRefs.current[2] = el} 
             isVisible={visibleElements['icon-2']} 
@@ -239,7 +239,7 @@ const CallToAction = () => {
           >
             <InstagramIcon fontSize="medium" />
           </SocialIcon>
-          <SocialIcon 
+          {/* <SocialIcon 
             ref={el => iconRefs.current[3] = el} 
             isVisible={visibleElements['icon-3']} 
             index={3}
@@ -248,7 +248,7 @@ const CallToAction = () => {
             rel="noopener noreferrer"
           >
             <YouTubeIcon fontSize="medium" />
-          </SocialIcon>
+          </SocialIcon> */}
           <SocialIcon 
             ref={el => iconRefs.current[4] = el} 
             isVisible={visibleElements['icon-4']} 
