@@ -283,13 +283,14 @@ const Button = styled.button`
 `;
 
 const WhatsAppButton = styled(Button)`
-    background-color: #25D366;
-    border-color: #25D366;
+    background-color: #ffffff;
+    color: #25D366
     margin-top: 10px;
     
     &:hover {
-        background-color: white;
-        color: #25D366;
+        background-color: #25D366;
+        border-color: #25D366;
+        color: #ffffff;
     }
 `;
 
@@ -362,9 +363,8 @@ const Product = () => {
         const message = `I would like to purchase:
 Product: ${product.title}
 Quantity: ${quantity}
-Price: KSH${product.price * quantity}
-Total: KSH${product.price * quantity}
-// Image: ${product.imageUrl}`;
+Price: KSH${product.price}
+Total: KSH${product.price * quantity}`;
         
         const whatsappUrl = `https://wa.me/254795683399?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
