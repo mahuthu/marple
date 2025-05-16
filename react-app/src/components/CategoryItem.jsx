@@ -23,9 +23,13 @@ const Container = styled.div`
   }
   
   ${mobile({
-    flex: "0 0 100%",
+    flex: "0 0 calc(100% - 40px)",
     height: "50vh",
-    margin: "10px 0"
+    margin: "10px 20px",
+    width: "auto",
+    maxWidth: "500px",
+    marginLeft: "auto",
+    marginRight: "auto"
   })}
 `;
 

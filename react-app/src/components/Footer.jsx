@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import { Facebook, Instagram, Twitter, WhatsApp } from '@mui/icons-material';
+import LogoImage from '../images/marple1.jpg'; // Import the logo directly
 
 // Import TikTok icon (since it's not available in Material UI)
 const TikTokIcon = () => (
@@ -153,7 +154,7 @@ const Footer = () => {
     <Container>
       <Wrapper>
         <LogoColumn>
-          <Logo src="images/marple1.jpg" alt="Maple Wood Products Logo" />
+          <Logo src={LogoImage} alt="Maple Wood Products Logo" />
           <ContactText>
             We are defined by standardized quality and perfection to our craft. 
             We have been making timber products since 2018. For years we have 
