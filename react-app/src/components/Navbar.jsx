@@ -172,7 +172,7 @@ const DesktopMenuItem = styled(MenuItem)`
 
 const MobileCartItem = styled(MenuItem)`
   display: none;
-  ${mobile({ 
+  ${mobile({
     display: 'flex',
     alignItems: 'center',
     marginLeft: '15px'
@@ -206,7 +206,7 @@ const MobileMenuToggle = styled.div`
   display: none;
   cursor: pointer;
   
-  ${mobile({ 
+  ${mobile({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -545,28 +545,28 @@ const Navbar = () => {
 
       {/* Desktop user dropdown menu */}
       <DesktopMenu ref={desktopMenuRef} isOpen={desktopMenuOpen}>
-        {currentUser ? (
-          <>
+          {currentUser ? (
+            <>
             <MenuItemLink onClick={handleLogout}>Sign Out</MenuItemLink>
-            <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
               <MenuItemLink>Profile</MenuItemLink>
-            </Link>
-            {wishlist.length > 0 && (
-              <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }}>
+                </Link>
+              {wishlist.length > 0 && (
+                  <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <MenuItemLink>Your Wishlist ({wishlist.length})</MenuItemLink>
-              </Link>
-            )}
-          </>
-        ) : (
-          <>
-            <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  </Link>
+              )}
+            </>
+          ) : (
+            <>
+              <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }}>
               <MenuItemLink>Register</MenuItemLink>
-            </Link>
-            <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+              </Link>
+              <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
               <MenuItemLink>Sign In</MenuItemLink>
-            </Link>
-          </>
-        )}
+              </Link>
+            </>
+          )}
       </DesktopMenu>
 
       {/* Mobile menu dropdown */}
@@ -601,8 +601,8 @@ const Navbar = () => {
           <MobileMenuItem>Contact</MobileMenuItem>
         </Link>
         {/* Removed cart from mobile menu since it's now in the header */}
-        {currentUser ? (
-          <>
+          {currentUser ? (
+            <>
             <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
               <MobileMenuItem>Profile</MobileMenuItem>
             </Link>
@@ -610,21 +610,21 @@ const Navbar = () => {
               <Link to="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
                 <MobileMenuItem>
                   Wishlist ({wishlist.length})
-                </MobileMenuItem>
-              </Link>
-            )}
+                  </MobileMenuItem>
+                </Link>
+              )}
             <MobileMenuItem onClick={handleLogout}>Sign Out</MobileMenuItem>
-          </>
-        ) : (
-          <>
+            </>
+          ) : (
+            <>
             <Link to="/register" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
-              <MobileMenuItem>Register</MobileMenuItem>
-            </Link>
+                <MobileMenuItem>Register</MobileMenuItem>
+              </Link>
             <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }} onClick={closeMobileMenu}>
-              <MobileMenuItem>Sign In</MobileMenuItem>
-            </Link>
-          </>
-        )}
+                <MobileMenuItem>Sign In</MobileMenuItem>
+              </Link>
+            </>
+          )}
       </MobileMenuContainer>
     </Container>
   );
